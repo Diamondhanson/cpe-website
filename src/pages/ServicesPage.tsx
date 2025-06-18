@@ -13,7 +13,7 @@ export default function ServicesPage() {
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full bg-gray-900">
           <Image
-            src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop"
+            src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&h=1080&fit=crop"
             alt="Professional video production services and equipment"
             fill
             className="object-cover"

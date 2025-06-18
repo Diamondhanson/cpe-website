@@ -26,27 +26,27 @@ export default function HomePage() {
         <div className="absolute inset-0 gradient-overlay"></div>
         
         {/* Hero Content - Unconventional Layout */}
-        <div className="relative z-10 max-w-none mx-auto px-6 lg:px-4 animate-fade-in">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in">
           <div className="grid lg:grid-cols-12 gap-8 items-center min-h-screen">
-            <div className="lg:col-span-8 lg:col-start-1">
-              <h1 className="mb-6 leading-none text-white font-bold text-6xl lg:text-7xl font-sans tracking-wide">
+            <div className="col-span-full lg:col-span-8 lg:col-start-1 text-center lg:text-left">
+              <h1 className="mb-6 leading-tight text-white font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans tracking-wide">
                 CAMEROON PHASE OF<br />
                 <span className="text-amber-300">ENTERTAINMENT</span>
               </h1>
-              <h2 className="luxury-heading mb-8 leading-tight text-white font-normal text-3xl lg:text-4xl">
+              <h2 className="luxury-heading mb-8 leading-tight text-white font-normal text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                 Crafting <span className="text-amber-300 italic">Visual Stories</span> That Transcend
               </h2>
               <div className="mb-12">
-                <p className="text-lg text-gray-200 leading-relaxed font-serif max-w-md">
+                <p className="text-base sm:text-lg text-gray-200 leading-relaxed font-serif max-w-md mx-auto lg:mx-0">
                   We transform your vision into compelling visual narratives through cinematic storytelling 
                   and uncompromising excellence.
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-6">
-                <button className="btn-primary">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
+                <button className="btn-primary w-full sm:w-auto px-8 py-4">
                   Begin Your Project
                 </button>
-                <button className="btn-secondary">
+                <button className="btn-secondary w-full sm:w-auto px-8 py-4">
                   Explore Portfolio
                 </button>
               </div>
@@ -63,7 +63,7 @@ export default function HomePage() {
               <div className="text-xs tracking-widest text-gray-500 uppercase mb-4 font-medium">
                 About Our Studio
               </div>
-              <h2 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
+              <h2 className="luxury-heading text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 mb-8 leading-tight">
                 Cameroon Phase of<br />
                 <span className="text-blue-800 italic">Entertainment</span>
               </h2>
@@ -105,7 +105,7 @@ export default function HomePage() {
             <div className="text-xs tracking-widest text-gray-500 uppercase mb-4 font-medium">
               Our Services
             </div>
-            <h2 className="luxury-heading text-6xl font-normal text-gray-900 mb-6 leading-tight">
+            <h2 className="luxury-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-gray-900 mb-6 leading-tight">
               Excellence in Every<br />
               <span className="text-blue-800 italic">Frame</span>
             </h2>
@@ -178,13 +178,13 @@ export default function HomePage() {
               <div className="text-xs tracking-widest text-gray-400 uppercase mb-4 font-medium">
                 Selected Works
               </div>
-              <h2 className="luxury-heading text-7xl font-normal text-white leading-tight">
+              <h2 className="luxury-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white leading-tight">
                 Featured<br />
                 <span className="text-amber-300 italic">Projects</span>
               </h2>
             </div>
             <div className="lg:col-span-5 lg:col-start-8">
-              <p className="text-xl text-gray-300 font-normal leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-300 font-normal leading-relaxed">
                 Explore our latest projects that showcase the intersection of creative vision 
                 and technical excellence.
               </p>
@@ -262,7 +262,7 @@ export default function HomePage() {
               <div className="text-xs tracking-widest text-gray-500 uppercase mb-4 font-medium">
                 Client Testimonials
               </div>
-              <h2 className="luxury-heading text-7xl font-normal text-gray-900 leading-tight">
+              <h2 className="luxury-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-gray-900 leading-tight">
                 What Our<br />
                 <span className="text-blue-800 italic">Clients Say</span>
               </h2>

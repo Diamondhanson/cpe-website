@@ -69,7 +69,7 @@ export default function HomePage() {
               </h2>
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
-                  With over a decade of experience in visual storytelling, we've redefined the boundaries 
+                  With over a decade of experience in visual storytelling, we&apos;ve redefined the boundaries 
                   of video production. Our approach marries artistic vision with technical mastery.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">

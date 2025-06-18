@@ -543,7 +543,7 @@ export default function PortfolioPage() {
                       </p>
                     </div>
                     <p className="text-gray-700 leading-relaxed font-normal italic text-lg">
-                      "{testimonial.quote}"
+                      &quot;{testimonial.quote}&quot;
                     </p>
                   </div>
                 </div>

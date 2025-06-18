@@ -165,14 +165,14 @@ export default function AboutPage() {
               
               <div className="space-y-6">
                 <p className="text-lg text-gray-300 leading-relaxed font-normal">
-                  Emmanuel Nguema's journey began with a camera in hand and a vision that would eventually 
+                  Emmanuel Nguema&apos;s journey began with a camera in hand and a vision that would eventually 
                   reshape the entertainment landscape of Central Africa. With over 15 years of experience 
                   in cinematic storytelling, he founded Cameroon Phase of Entertainment on the principle 
                   that every story deserves to be told with passion and precision.
                 </p>
                 <p className="text-lg text-gray-300 leading-relaxed font-normal">
                   Under his leadership, CPE has evolved from a small creative collective into a powerhouse 
-                  of visual innovation. Emmanuel's unique approach combines traditional African storytelling 
+                  of visual innovation. Emmanuel&apos;s unique approach combines traditional African storytelling 
                   techniques with cutting-edge production methods, creating a distinctive voice that resonates 
                   both locally and internationally.
                 </p>
@@ -198,8 +198,8 @@ export default function AboutPage() {
               {/* Quote */}
               <div className="mt-10 border-l-4 border-amber-300 pl-6 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-r-lg">
                 <p className="text-lg text-gray-200 italic leading-relaxed font-normal">
-                  "Our mission is not just to create content, but to craft experiences that transcend 
-                  cultural boundaries and connect people through the universal language of visual storytelling."
+                  &quot;Our mission is not just to create content, but to craft experiences that transcend 
+                  cultural boundaries and connect people through the universal language of visual storytelling.&quot;
                 </p>
                 <p className="text-sm text-gray-400 mt-3 font-medium">
                   — Emmanuel Nguema, CEO & Founder

@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 
 export default function ServicesPage() {
@@ -11,11 +12,13 @@ export default function ServicesPage() {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden gradient-dark">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full bg-gray-900">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1920&h=1080&fit=crop"
             alt="Professional video production services and equipment"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
             style={{ filter: 'brightness(0.7) contrast(1.2)' }}
+            priority
           />
         </div>
         
@@ -77,7 +80,7 @@ export default function ServicesPage() {
                   <div className="w-3 h-3 bg-blue-600 rounded-full mt-2"></div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Brand Films</h4>
-                    <p className="text-gray-600">Cinematic storytelling that captures your brand's essence and values.</p>
+                    <p className="text-gray-600">Cinematic storytelling that captures your brand&apos;s essence and values.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -102,9 +105,11 @@ export default function ServicesPage() {
             </div>
             <div className="lg:col-span-6 animate-fade-in">
               <div className="relative">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=700&h=500&fit=crop"
                   alt="Commercial video production setup"
+                  width={700}
+                  height={500}
                   className="w-full h-auto rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-500 opacity-20 rounded-lg"></div>
@@ -162,9 +167,11 @@ export default function ServicesPage() {
                 </div>
             <div className="lg:col-span-6 lg:order-1 animate-fade-in">
               <div className="relative">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=700&h=500&fit=crop"
                   alt="Event videography and documentation"
+                  width={700}
+                  height={500}
                   className="w-full h-auto rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-amber-500 opacity-20 rounded-lg"></div>
@@ -209,9 +216,11 @@ export default function ServicesPage() {
             </div>
             <div className="lg:col-span-6 animate-fade-in">
               <div className="relative">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=700&h=500&fit=crop"
                   alt="Documentary filmmaking"
+                  width={700}
+                  height={500}
                   className="w-full h-auto rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-green-500 opacity-20 rounded-lg"></div>
@@ -238,9 +247,11 @@ export default function ServicesPage() {
             {/* Music Videos */}
             <div className="animate-slide-up">
               <div className="relative mb-8">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop"
                   alt="Music video production"
+                  width={600}
+                  height={400}
                   className="w-full h-64 object-cover rounded-lg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>
@@ -271,9 +282,11 @@ export default function ServicesPage() {
             {/* Post-Production */}
             <div className="animate-slide-up">
               <div className="relative mb-8">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop"
                   alt="Post-production editing suite"
+                  width={600}
+                  height={400}
                   className="w-full h-64 object-cover rounded-lg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>

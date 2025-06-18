@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 
 export default function ContactPage() {
@@ -49,11 +49,13 @@ export default function ContactPage() {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden gradient-dark">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full bg-gray-900">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&h=1080&fit=crop"
             alt="Professional studio setup for creative consultation"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
             style={{ filter: 'brightness(0.6) contrast(1.2)' }}
+            priority
           />
         </div>
         
@@ -63,13 +65,13 @@ export default function ContactPage() {
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-fade-in">
           <h1 className="luxury-heading mb-6 leading-none text-white font-normal text-6xl lg:text-7xl">
-            Let's Create<br />
+            Let&apos;s Create<br />
             <span className="text-amber-300 italic">Something Amazing</span>
           </h1>
-          <p className="text-xl text-gray-200 leading-relaxed font-normal max-w-2xl mx-auto">
-            Ready to bring your vision to life? Get in touch with our creative team 
-            and let's discuss your next project.
-          </p>
+                      <p className="text-xl text-gray-200 leading-relaxed font-normal max-w-2xl mx-auto">
+              Ready to bring your vision to life? Get in touch with our creative team 
+              and let&apos;s discuss your next project.
+            </p>
         </div>
       </section>
 
@@ -87,8 +89,8 @@ export default function ContactPage() {
                 <span className="text-blue-800 italic">Creative Journey</span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed font-normal mb-12">
-                Whether you're looking to create a commercial, documentary, or brand film, 
-                we're here to help bring your vision to life. Let's discuss your project and 
+                Whether you&apos;re looking to create a commercial, documentary, or brand film, 
+                we&apos;re here to help bring your vision to life. Let&apos;s discuss your project and 
                 explore the possibilities together.
               </p>
 
@@ -194,7 +196,7 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <h3 className="text-2xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
-                    <p className="text-gray-600">Thank you for reaching out. We'll get back to you within 24 hours.</p>
+                    <p className="text-gray-600">Thank you for reaching out. We&apos;ll get back to you within 24 hours.</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">

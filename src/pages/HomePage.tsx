@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 import heroImage from '../assets/images/hero-pic.jpg';
 
@@ -12,11 +12,13 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-dark">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full bg-gray-900">
-          <img
-            src={heroImage.src}
+          <Image
+            src={heroImage}
             alt="Professional video production setup with cameras and lighting equipment"
             className="w-full h-full object-cover"
             style={{ filter: 'brightness(0.8) contrast(1.9)' }}
+            width={1920}
+            height={1080}
           />
         </div>
         
@@ -81,11 +83,13 @@ export default function HomePage() {
             </div>
             <div className="lg:col-span-6 lg:col-start-1 lg:row-start-1 animate-fade-in">
               <div className="relative">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=700&h=500&fit=crop"
                   alt="Video production team"
                   className="w-full h-auto transform hover:scale-105 transition-transform duration-700"
                   style={{ clipPath: 'polygon(0 0, 100% 0, 95% 100%, 0 100%)' }}
+                  width={700}
+                  height={500}
                 />
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-amber-500 opacity-20"></div>
               </div>

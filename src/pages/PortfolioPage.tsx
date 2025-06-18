@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 
 export default function PortfolioPage() {
@@ -197,11 +198,13 @@ export default function PortfolioPage() {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden gradient-dark">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full bg-gray-900">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&h=1080&fit=crop"
             alt="Professional video production portfolio showcase"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
             style={{ filter: 'brightness(0.7) contrast(1.2)' }}
+            priority
           />
         </div>
         
@@ -415,7 +418,7 @@ export default function PortfolioPage() {
               <span className="text-blue-800 italic">Review</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-normal">
-              We'd love to hear about your experience working with us. Your feedback helps us 
+              We&apos;d love to hear about your experience working with us. Your feedback helps us 
               continue delivering exceptional video production services.
             </p>
           </div>
@@ -522,9 +525,11 @@ export default function PortfolioPage() {
             {displayedTestimonials.map((testimonial, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-lg animate-slide-up border-l-4 border-blue-600">
                 <div className="flex items-start space-x-4">
-                  <img
+                  <Image
                     src={testimonial.avatar}
                     alt={testimonial.author}
+                    width={64}
+                    height={64}
                     className="w-16 h-16 rounded-full flex-shrink-0"
                   />
                   <div className="flex-1">

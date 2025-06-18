@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 
 export default function AboutPage() {
@@ -52,11 +52,13 @@ export default function AboutPage() {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden gradient-dark">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full bg-gray-900">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&h=1080&fit=crop"
             alt="Creative team collaborating in modern studio environment"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
             style={{ filter: 'brightness(0.7) contrast(1.2)' }}
+            priority
           />
         </div>
         
@@ -96,23 +98,25 @@ export default function AboutPage() {
                   for its artistic integrity and technical excellence.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
-                  Over the past decade, we've had the privilege of working with leading brands, emerging 
+                  Over the past decade, we&apos;ve had the privilege of working with leading brands, emerging 
                   artists, and visionary organizations across Cameroon and beyond. Our journey has been 
                   marked by countless stories told, emotions captured, and boundaries pushed in pursuit 
                   of cinematic perfection.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
                   From our humble beginnings in Douala to becoming a recognized name in the industry, 
-                  we've remained committed to our core belief: every project deserves the same level 
+                  we&apos;ve remained committed to our core belief: every project deserves the same level 
                   of dedication, creativity, and craftsmanship, regardless of scale or budget.
                 </p>
               </div>
             </div>
             <div className="lg:col-span-6 animate-fade-in">
               <div className="relative">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop"
                   alt="Team collaborating on creative project"
+                  width={800}
+                  height={600}
                   className="w-full h-auto rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-amber-500 opacity-20 rounded-lg"></div>
@@ -130,9 +134,11 @@ export default function AboutPage() {
             {/* CEO Image - Left Side */}
             <div className="lg:col-span-5 animate-fade-in">
               <div className="relative">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop&crop=face"
                   alt="Emmanuel Nguema - CEO & Founder"
+                  width={600}
+                  height={700}
                   className="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-700 border-4 border-white/10"
                 />
                 <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-br from-blue-500 to-amber-400 opacity-30 rounded-2xl"></div>
@@ -282,9 +288,11 @@ export default function AboutPage() {
               >
                 <div className="text-center">
                   <div className="relative mb-6">
-                    <img 
+                    <Image 
                       src={member.image}
                       alt={member.name}
+                      width={128}
+                      height={128}
                       className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white/20 group-hover:border-amber-300/50 transition-all duration-500"
                     />
                     <div className="absolute inset-0 rounded-full bg-gradient-to-t from-blue-900/20 to-transparent"></div>

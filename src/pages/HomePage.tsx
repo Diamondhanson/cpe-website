@@ -7,7 +7,7 @@ import heroImage from '../assets/images/hero-pic.jpg';
 
 export default function HomePage() {
   return (
-    <Layout isHomePage={true}>
+    <Layout>
       {/* Luxury Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-dark">
         {/* Background Image */}

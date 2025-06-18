@@ -12,7 +12,7 @@ interface LayoutProps {
 export default function Layout({ children, isHomePage = false }: LayoutProps) {
   return (
     <div className="min-h-screen">
-      <Header isHomePage={isHomePage} />
+      <Header />
       {children}
       <Footer />
     </div>

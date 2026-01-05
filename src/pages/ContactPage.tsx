@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Layout from '../components/Layout';
+import { supabase } from '../lib/supabaseClient';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,8 @@ export default function ContactPage() {
     projectType: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -23,10 +26,28 @@ export default function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const { error } = await supabase.from('contact_messages').insert({
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      company: formData.company.trim() || null,
+      phone_number: formData.phoneNumber.trim() || null,
+      project_type: formData.projectType.trim() || null,
+      message: formData.message.trim(),
+    });
+
+    if (error) {
+      setSubmitError(error.message);
+      setIsSubmitting(false);
+      return;
+    }
+
     setIsSubmitted(true);
     // Reset form after 3 seconds
     setTimeout(() => {
@@ -40,6 +61,7 @@ export default function ContactPage() {
         projectType: ''
       });
     }, 3000);
+    setIsSubmitting(false);
   };
 
   return (
@@ -132,7 +154,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
-                    <p className="text-gray-600">hello@cpe-entertainment.com</p>
+                    <p className="text-gray-600">hello@fantasyartsproduction.com</p>
                   </div>
                 </div>
               </div>
@@ -142,7 +164,7 @@ export default function ContactPage() {
                 <h4 className="text-lg font-semibold text-gray-900 mb-4">Follow Us</h4>
                 <div className="flex space-x-6">
                   <a
-                    href="https://instagram.com/cpe-entertainment"
+                    href="https://instagram.com/fantasyartsproduction"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -152,7 +174,7 @@ export default function ContactPage() {
                     </svg>
                   </a>
                   <a
-                    href="https://facebook.com/cpe-entertainment"
+                    href="https://facebook.com/fantasyartsproduction"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -162,7 +184,7 @@ export default function ContactPage() {
                     </svg>
                   </a>
                   <a
-                    href="https://twitter.com/cpe-entertainment"
+                    href="https://twitter.com/fantasyartsprod"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -172,7 +194,7 @@ export default function ContactPage() {
                     </svg>
                   </a>
                   <a
-                    href="https://linkedin.com/company/cpe-entertainment"
+                    href="https://linkedin.com/company/fantasyartsproduction"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -200,6 +222,11 @@ export default function ContactPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    {submitError && (
+                      <div className="p-4 bg-red-100 text-red-800">
+                        Unable to send message. {submitError}
+                      </div>
+                    )}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -212,7 +239,7 @@ export default function ContactPage() {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-sm bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                           placeholder="Your full name"
                         />
                       </div>
@@ -227,7 +254,7 @@ export default function ContactPage() {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-sm bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                           placeholder="your@email.com"
                         />
                       </div>
@@ -244,7 +271,7 @@ export default function ContactPage() {
                           name="phoneNumber"
                           value={formData.phoneNumber}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-sm bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                           placeholder="+237 123 456 789"
                         />
                       </div>
@@ -258,7 +285,7 @@ export default function ContactPage() {
                           name="company"
                           value={formData.company}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-sm bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                           placeholder="Your company"
                         />
                       </div>
@@ -273,7 +300,7 @@ export default function ContactPage() {
                         name="projectType"
                         value={formData.projectType}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-sm bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                       >
                         <option value="">Select project type</option>
                         <option value="commercial">Commercial</option>
@@ -296,16 +323,17 @@ export default function ContactPage() {
                         onChange={handleInputChange}
                         required
                         rows={6}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-sm bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
                         placeholder="Tell us about your project, timeline, budget, and any specific requirements..."
                       />
                     </div>
 
                     <button
                       type="submit"
+                      disabled={isSubmitting}
                       className="w-full bg-blue-600 text-white py-4 px-6 rounded-sm font-semibold hover:bg-blue-700 transition-colors duration-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     >
-                      Send Message
+                      {isSubmitting ? 'Sending…' : 'Send Message'}
                     </button>
                   </form>
                 )}

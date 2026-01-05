@@ -1,6 +1,6 @@
 # Components
 
-This directory contains reusable UI components for the CPE website.
+This directory contains reusable UI components for the Fantasy Arts website.
 
 ## Available Components
 

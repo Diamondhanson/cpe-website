@@ -1,49 +1,55 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Layout from '../components/Layout';
+import leaderImage from '../assets/images/chuzih.jpg';
+import { supabase } from '../lib/supabaseClient';
 
 export default function AboutPage() {
 
-  const teamMembers = [
-    {
-      name: "Emmanuel Nguema",
-      role: "Creative Director & Founder",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-      bio: "Visionary leader with 15+ years in cinematic storytelling and brand narrative development."
-    },
-    {
-      name: "Sarah Mbeki",
-      role: "Lead Cinematographer",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
-      bio: "Award-winning cinematographer specializing in commercial and documentary filmmaking."
-    },
-    {
-      name: "David Tchami",
-      role: "Post-Production Director",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-      bio: "Master of visual effects and color grading with expertise in cutting-edge editing technologies."
-    },
-    {
-      name: "Grace Fotso",
-      role: "Producer & Project Manager",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
-      bio: "Strategic producer ensuring seamless project execution from concept to final delivery."
-    },
-    {
-      name: "Michael Biya",
-      role: "Sound Designer",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-      bio: "Audio specialist creating immersive soundscapes that enhance visual storytelling."
-    },
-    {
-      name: "Aminata Kone",
-      role: "Marketing Director",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop&crop=face",
-      bio: "Brand strategist connecting our creative work with target audiences across multiple platforms."
+  type TeamMember = {
+    id: string;
+    name: string;
+    role: string;
+    description: string;
+    image_url: string;
+  };
+
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [teamLoading, setTeamLoading] = useState(true);
+  const [teamError, setTeamError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadTeam() {
+      setTeamLoading(true);
+      setTeamError(null);
+
+      const { data, error } = await supabase
+        .from('team_members')
+        .select('id,name,role,description,image_url')
+        .eq('is_active', true)
+        .order('sort_order', { ascending: true });
+
+      if (!mounted) return;
+      if (error) {
+        setTeamError(error.message);
+        setTeamMembers([]);
+        setTeamLoading(false);
+        return;
+      }
+
+      setTeamMembers((data ?? []) as TeamMember[]);
+      setTeamLoading(false);
     }
-  ];
+
+    loadTeam();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <Layout>
@@ -72,7 +78,7 @@ export default function AboutPage() {
             <span className="text-amber-300 italic">Creative Journey</span>
           </h1>
           <p className="text-xl text-gray-200 leading-relaxed font-normal max-w-2xl mx-auto">
-            Discover the story behind Cameroon Phase of Entertainment and the passionate team 
+            Discover the story behind Fantasy Arts production and the passionate team 
             that brings your visions to life through exceptional storytelling.
           </p>
         </div>
@@ -92,7 +98,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
-                  Founded in 2014, Cameroon Phase of Entertainment emerged from a simple yet powerful vision: 
+                  Founded in 2014, Fantasy Arts production emerged from a simple yet powerful vision: 
                   to transform the landscape of visual storytelling in Central Africa. What began as a small 
                   collective of passionate filmmakers has evolved into a premier production house renowned 
                   for its artistic integrity and technical excellence.
@@ -135,8 +141,8 @@ export default function AboutPage() {
             <div className="lg:col-span-5 animate-fade-in">
               <div className="relative">
                 <Image 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop&crop=face"
-                  alt="Emmanuel Nguema - CEO & Founder"
+                  src={leaderImage}
+                  alt="Chuzih Herbert - CEO & Founder"
                   width={600}
                   height={700}
                   className="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-700 border-4 border-white/10"
@@ -157,7 +163,7 @@ export default function AboutPage() {
               </h2>
               
               <h3 className="text-2xl font-medium text-white mb-2 tracking-wide">
-                Emmanuel Nguema
+                Chuzih Herbert
               </h3>
               <p className="text-amber-300 text-sm font-medium tracking-wider uppercase mb-8">
                 Chief Executive Officer & Founder
@@ -165,20 +171,20 @@ export default function AboutPage() {
               
               <div className="space-y-6">
                 <p className="text-lg text-gray-300 leading-relaxed font-normal">
-                  Emmanuel Nguema&apos;s journey began with a camera in hand and a vision that would eventually 
-                  reshape the entertainment landscape of Central Africa. With over 15 years of experience 
-                  in cinematic storytelling, he founded Cameroon Phase of Entertainment on the principle 
+                  Chuzih Herbert&apos;s journey began with a camera in hand and a vision that would eventually 
+                  reshape the entertainment landscape of Central Africa. With over 10 years of experience 
+                  in cinematic storytelling, he founded Fantasy Arts production on the principle 
                   that every story deserves to be told with passion and precision.
                 </p>
                 <p className="text-lg text-gray-300 leading-relaxed font-normal">
-                  Under his leadership, CPE has evolved from a small creative collective into a powerhouse 
-                  of visual innovation. Emmanuel&apos;s unique approach combines traditional African storytelling 
+                  Under his leadership, Fantasy Arts has evolved from a small creative collective into a powerhouse 
+                  of visual innovation. Chuzih&apos;s unique approach combines traditional African storytelling 
                   techniques with cutting-edge production methods, creating a distinctive voice that resonates 
                   both locally and internationally.
                 </p>
                 <p className="text-lg text-gray-300 leading-relaxed font-normal">
                   His commitment to nurturing emerging talent and fostering creative collaboration has made 
-                  CPE not just a production company, but a catalyst for the next generation of African 
+                  Fantasy Arts not just a production company, but a catalyst for the next generation of African 
                   filmmakers and content creators.
                 </p>
               </div>
@@ -186,11 +192,11 @@ export default function AboutPage() {
               {/* CEO Achievements */}
               <div className="mt-10 grid grid-cols-2 gap-6">
                 <div className="text-center p-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl hover:bg-white/20 transition-colors duration-300">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">15+</div>
+                  <div className="text-3xl font-bold text-blue-400 mb-2">10+</div>
                   <p className="text-sm text-gray-300 font-medium">Years Experience</p>
                 </div>
                 <div className="text-center p-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl hover:bg-white/20 transition-colors duration-300">
-                  <div className="text-3xl font-bold text-amber-400 mb-2">200+</div>
+                  <div className="text-3xl font-bold text-amber-400 mb-2">250+</div>
                   <p className="text-sm text-gray-300 font-medium">Projects Delivered</p>
                 </div>
               </div>
@@ -202,7 +208,7 @@ export default function AboutPage() {
                   cultural boundaries and connect people through the universal language of visual storytelling.&quot;
                 </p>
                 <p className="text-sm text-gray-400 mt-3 font-medium">
-                  — Emmanuel Nguema, CEO & Founder
+                  — Chuzih Herbert, CEO & Founder
                 </p>
               </div>
             </div>
@@ -280,39 +286,51 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <div 
-                key={index} 
-                className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl"
-              >
-                <div className="text-center">
-                  <div className="relative mb-6">
-                    <Image 
-                      src={member.image}
-                      alt={member.name}
-                      width={128}
-                      height={128}
-                      className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white/20 group-hover:border-amber-300/50 transition-all duration-500"
-                    />
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-t from-blue-900/20 to-transparent"></div>
+          {teamLoading ? (
+            <div className="text-center text-gray-300">Loading team members…</div>
+          ) : teamError ? (
+            <div className="text-center text-red-300">
+              Unable to load team members. {teamError}
+            </div>
+          ) : teamMembers.length === 0 ? (
+            <div className="text-center text-gray-300">
+              No team members have been added yet.
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {teamMembers.map((member) => (
+                <div
+                  key={member.id}
+                  className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl"
+                >
+                  <div className="text-center">
+                    <div className="relative mb-6">
+                      <Image
+                        src={member.image_url}
+                        alt={member.name}
+                        width={128}
+                        height={128}
+                        className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white/20 group-hover:border-amber-300/50 transition-all duration-500"
+                      />
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-t from-blue-900/20 to-transparent"></div>
+                    </div>
+
+                    <h3 className="luxury-heading text-xl font-normal text-white mb-2 tracking-wide group-hover:text-amber-300 transition-colors duration-300">
+                      {member.name}
+                    </h3>
+
+                    <p className="text-amber-300 text-sm font-medium tracking-wider uppercase mb-4">
+                      {member.role}
+                    </p>
+
+                    <p className="text-gray-400 text-sm leading-relaxed font-normal group-hover:text-gray-300 transition-colors duration-300">
+                      {member.description}
+                    </p>
                   </div>
-                  
-                  <h3 className="luxury-heading text-xl font-normal text-white mb-2 tracking-wide group-hover:text-amber-300 transition-colors duration-300">
-                    {member.name}
-                  </h3>
-                  
-                  <p className="text-amber-300 text-sm font-medium tracking-wider uppercase mb-4">
-                    {member.role}
-                  </p>
-                  
-                  <p className="text-gray-400 text-sm leading-relaxed font-normal group-hover:text-gray-300 transition-colors duration-300">
-                    {member.bio}
-                  </p>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           <div className="text-center mt-16">
             <button className="btn-primary text-lg px-12 py-4">

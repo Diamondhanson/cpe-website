@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import logo from '../assets/images/Chuzih Logo.png';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,11 +39,23 @@ export default function Header() {
         <div className="flex justify-between items-center h-20">
           <Link 
             href="/"
-            className={`text-lg font-medium tracking-wide luxury-heading transition-colors duration-500 hover:opacity-80 ${
-              isScrolled ? 'text-gray-900' : 'text-white'
-            }`}
+            className="flex items-center gap-3 transition-opacity duration-500 hover:opacity-80"
           >
-            LOGO HERE
+            <Image
+              src={logo}
+              alt="Fantasy Arts"
+              width={44}
+              height={44}
+              className="h-11 w-11 object-contain"
+              priority
+            />
+            <span
+              className={`text-lg font-medium tracking-wide luxury-heading transition-colors duration-500 ${
+                isScrolled ? 'text-gray-900' : 'text-white'
+              }`}
+            >
+              Fantasy Arts
+            </span>
           </Link>
           
           {/* Desktop Navigation */}

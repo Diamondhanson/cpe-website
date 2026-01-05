@@ -1,11 +1,80 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Layout from '../components/Layout';
 import heroImage from '../assets/images/hero-pic.jpg';
+import { supabase } from '../lib/supabaseClient';
+
+type FeaturedProject = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  video_url: string;
+  tags: string[] | null;
+};
 
 export default function HomePage() {
+  const [featuredProjects, setFeaturedProjects] = useState<FeaturedProject[]>([]);
+  const [loadingFeatured, setLoadingFeatured] = useState(true);
+
+  useEffect(() => {
+    async function loadFeatured() {
+      const { data, error } = await supabase
+        .from('portfolio_items')
+        .select('id,title,description,category,video_url,tags')
+        .eq('is_active', true)
+        .eq('is_featured', true)
+        .order('category', { ascending: true });
+
+      if (error) {
+        console.error('Error loading featured projects:', error);
+        setFeaturedProjects([]);
+      } else {
+        setFeaturedProjects((data ?? []) as FeaturedProject[]);
+      }
+      setLoadingFeatured(false);
+    }
+    loadFeatured();
+  }, []);
+
+  function extractYoutubeId(url: string): string | null {
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+      /^([a-zA-Z0-9_-]{11})$/,
+    ];
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) return match[1];
+    }
+    return null;
+  }
+
+  function getCategoryDisplayName(category: string): string {
+    const map: Record<string, string> = {
+      COMMERCIAL: 'Commercial',
+      'MUSIC VIDEO': 'Music Video',
+      EVENT: 'Event',
+      DOCUMENTARY: 'Documentary',
+      'SHORT FILE': 'Short Film',
+    };
+    return map[category] || category;
+  }
+
+  // Layout logic: first item gets 8 cols, second gets 4, third gets 4, fourth gets 8 starting at col 5
+  function getColSpan(index: number, total: number): string {
+    if (total === 0) return '';
+    if (index === 0) return 'lg:col-span-8';
+    if (index === 1) return 'lg:col-span-4';
+    if (index === 2) return 'lg:col-span-4';
+    if (index === 3) return 'lg:col-span-8 lg:col-start-5';
+    // For more than 4, alternate
+    if (index % 4 === 0) return 'lg:col-span-8';
+    if (index % 4 === 1) return 'lg:col-span-4';
+    if (index % 4 === 2) return 'lg:col-span-4';
+    return 'lg:col-span-8 lg:col-start-5';
+  }
   return (
     <Layout>
       {/* Luxury Hero Section */}
@@ -30,8 +99,8 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-12 gap-8 items-center min-h-screen">
             <div className="col-span-full lg:col-span-8 lg:col-start-1 text-center lg:text-left">
               <h1 className="mb-6 leading-tight text-white font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans tracking-wide">
-                CAMEROON PHASE OF<br />
-                <span className="text-amber-300">ENTERTAINMENT</span>
+                FANARTS<br />
+                <span className="text-amber-300">STUDIO</span>
               </h1>
               <h2 className="luxury-heading mb-8 leading-tight text-white font-normal text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                 Crafting <span className="text-amber-300 italic">Visual Stories</span> That Transcend
@@ -64,8 +133,8 @@ export default function HomePage() {
                 About Our Studio
               </div>
               <h2 className="luxury-heading text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 mb-8 leading-tight">
-                Cameroon Phase of<br />
-                <span className="text-blue-800 italic">Entertainment</span>
+                Fanarts<br />
+                <span className="text-blue-800 italic">production</span>
               </h2>
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
@@ -191,60 +260,42 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 mb-16">
-            {[
-              {
-                title: "Cinematic Movie Trailer",
-                description: "Epic storytelling with dramatic visuals and professional cinematography",
-                youtubeId: "s7e15NOpsVE",
-                category: "Movie Trailer",
-                colSpan: "lg:col-span-8"
-              },
-              {
-                title: "Music Video Production",
-                description: "Creative visual narrative with artistic direction and dynamic editing",
-                youtubeId: "D65vWyvCnKA",
-                category: "Music Video",
-                colSpan: "lg:col-span-4"
-              },
-              {
-                title: "Short Film",
-                description: "Compelling narrative storytelling with professional production values",
-                youtubeId: "qJrh2KorSSg",
-                category: "Short Film",
-                colSpan: "lg:col-span-4"
-              },
-              {
-                title: "Tutorial Production",
-                description: "Educational content with clear visual communication and expert editing",
-                youtubeId: "h0t5J59hjT8",
-                category: "Tutorial",
-                colSpan: "lg:col-span-8 lg:col-start-5"
-              }
-            ].map((work, index) => (
-              <div key={index} className={`group ${work.colSpan}`}>
-                <div className="video-container mb-6">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${work.youtubeId}?rel=0&modestbranding=1&showinfo=0`}
-                    title={work.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-                <div>
-                  <p className="text-sm text-amber-300 font-medium tracking-wider uppercase mb-2">
-                    {work.category}
-                  </p>
-                  <h3 className="text-xl font-normal text-white luxury-heading mb-2">
-                    {work.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 font-normal leading-relaxed">
-                    {work.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          {loadingFeatured ? (
+            <div className="text-center text-gray-400 py-12">Loading featured projects…</div>
+          ) : featuredProjects.length === 0 ? (
+            <div className="text-center text-gray-400 py-12">No featured projects yet.</div>
+          ) : (
+            <div className="grid lg:grid-cols-12 gap-8 mb-16">
+              {featuredProjects.map((work, index) => {
+                const youtubeId = extractYoutubeId(work.video_url);
+                if (!youtubeId) return null;
+
+                return (
+                  <div key={work.id} className={`group ${getColSpan(index, featuredProjects.length)}`}>
+                    <div className="video-container mb-6">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&showinfo=0`}
+                        title={work.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                    <div>
+                      <p className="text-sm text-amber-300 font-medium tracking-wider uppercase mb-2">
+                        {getCategoryDisplayName(work.category)}
+                      </p>
+                      <h3 className="text-xl font-normal text-white luxury-heading mb-2">
+                        {work.title}
+                      </h3>
+                      <p className="text-sm text-gray-400 font-normal leading-relaxed">
+                        {work.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           <div className="text-center">
             <button className="btn-primary text-lg px-16 py-5">
@@ -272,7 +323,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-3 gap-12">
             {[
               {
-                quote: "Cameroon Phase of Entertainment redefined our brand narrative with extraordinary precision and artistic vision.",
+                quote: "Fantasy Arts production redefined our brand narrative with extraordinary precision and artistic vision.",
                 author: "Sarah Johnson",
                 position: "Creative Director, TechFlow",
                 featured: true

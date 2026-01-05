@@ -6,13 +6,12 @@ import Footer from './Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
-  isHomePage?: boolean;
 }
 
-export default function Layout({ children, isHomePage = false }: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen">
-      <Header isHomePage={isHomePage} />
+      <Header />
       {children}
       <Footer />
     </div>

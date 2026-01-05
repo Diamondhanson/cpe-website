@@ -1,4 +1,4 @@
-# CPE Website Design System
+# Fanarts Studio Website Design System
 
 This document outlines the design system variables available in `src/app/globals.css` for consistent styling across the application.
 

@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="lg:col-span-5">
             <div className="mb-8">
               <h3 className="luxury-heading text-3xl font-normal text-white mb-4 tracking-wide">
-                CAMEROON PHASE OF ENTERTAINMENT
+                Fanarts Studio
               </h3>
               <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-amber-400 mb-6"></div>
               <p className="text-gray-300 leading-relaxed font-normal text-lg mb-6">
@@ -47,7 +47,7 @@ export default function Footer() {
               </h4>
               <div className="flex space-x-4">
                 <a
-                  href="https://instagram.com/cpe-entertainment"
+                  href="https://instagram.com/fantasyartsproduction"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -57,7 +57,7 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="https://facebook.com/cpe-entertainment"
+                  href="https://facebook.com/fantasyartsproduction"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -67,7 +67,7 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="https://twitter.com/cpe-entertainment"
+                  href="https://twitter.com/fantasyartsprod"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -77,7 +77,7 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="https://linkedin.com/company/cpe-entertainment"
+                  href="https://linkedin.com/company/fantasyartsproduction"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -126,7 +126,7 @@ export default function Footer() {
             <div className="space-y-4 mb-8">
               <div className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-300 group">
                 <span className="text-amber-400 group-hover:scale-110 transition-transform duration-300">📧</span>
-                <span className="font-normal">hello@cameroonphase.com</span>
+                <span className="font-normal">hello@fantasyartsproduction.com</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-300 group">
                 <span className="text-blue-400 group-hover:scale-110 transition-transform duration-300">📞</span>
@@ -146,7 +146,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-1">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm font-normal mb-4 md:mb-0">
-              © 2024 Cameroon Phase of Entertainment. All rights reserved.
+              © 2024 Fanarts Studio. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Privacy Policy</a>

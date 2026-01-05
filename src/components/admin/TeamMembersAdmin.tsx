@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from 'react';
+
 import Image from 'next/image';
 import { supabase } from '../../lib/supabaseClient';
 
@@ -287,6 +288,7 @@ export default function TeamMembersAdmin() {
 
                 {/* Image Preview */}
                 {imagePreview && (
+
                   <div className="relative w-full h-48 rounded-lg border border-gray-300 overflow-hidden bg-gray-50">
                     <Image
                       src={imagePreview}
@@ -371,6 +373,7 @@ export default function TeamMembersAdmin() {
                     {/* Image */}
                     {m.image_url && (
                       <div className="flex-shrink-0">
+
                         <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 bg-gray-100">
                           <Image
                             src={m.image_url}

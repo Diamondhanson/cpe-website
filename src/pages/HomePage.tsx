@@ -1,22 +1,96 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 import heroImage from '../assets/images/hero-pic.jpg';
+import { supabase } from '../lib/supabaseClient';
+
+type FeaturedProject = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  video_url: string;
+  tags: string[] | null;
+};
 
 export default function HomePage() {
+  const [featuredProjects, setFeaturedProjects] = useState<FeaturedProject[]>([]);
+  const [loadingFeatured, setLoadingFeatured] = useState(true);
+
+  useEffect(() => {
+    async function loadFeatured() {
+      const { data, error } = await supabase
+        .from('portfolio_items')
+        .select('id,title,description,category,video_url,tags')
+        .eq('is_active', true)
+        .eq('is_featured', true)
+        .order('category', { ascending: true });
+
+      if (error) {
+        console.error('Error loading featured projects:', error);
+        setFeaturedProjects([]);
+      } else {
+        setFeaturedProjects((data ?? []) as FeaturedProject[]);
+      }
+      setLoadingFeatured(false);
+    }
+    loadFeatured();
+  }, []);
+
+  function extractYoutubeId(url: string): string | null {
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+      /^([a-zA-Z0-9_-]{11})$/,
+    ];
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) return match[1];
+    }
+    return null;
+  }
+
+  function getCategoryDisplayName(category: string): string {
+    const map: Record<string, string> = {
+      COMMERCIAL: 'Commercial',
+      'MUSIC VIDEO': 'Music Video',
+      EVENT: 'Event',
+      DOCUMENTARY: 'Documentary',
+      'SHORT FILE': 'Short Film',
+    };
+    return map[category] || category;
+  }
+
+  // Layout logic: first item gets 8 cols, second gets 4, third gets 4, fourth gets 8 starting at col 5
+  function getColSpan(index: number, total: number): string {
+    if (total === 0) return '';
+    if (index === 0) return 'lg:col-span-8';
+    if (index === 1) return 'lg:col-span-4';
+    if (index === 2) return 'lg:col-span-4';
+    if (index === 3) return 'lg:col-span-8 lg:col-start-5';
+    // For more than 4, alternate
+    if (index % 4 === 0) return 'lg:col-span-8';
+    if (index % 4 === 1) return 'lg:col-span-4';
+    if (index % 4 === 2) return 'lg:col-span-4';
+    return 'lg:col-span-8 lg:col-start-5';
+  }
   return (
-    <Layout isHomePage={true}>
+    <Layout>
       {/* Luxury Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-dark">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full bg-gray-900">
-          <img
-            src={heroImage.src}
+          <Image
+            src={heroImage}
             alt="Professional video production setup with cameras and lighting equipment"
             className="w-full h-full object-cover"
             style={{ filter: 'brightness(0.8) contrast(1.9)' }}
+            width={1920}
+            height={1080}
+            priority
+            placeholder="blur"
+            sizes="100vw"
           />
         </div>
         
@@ -24,27 +98,27 @@ export default function HomePage() {
         <div className="absolute inset-0 gradient-overlay"></div>
         
         {/* Hero Content - Unconventional Layout */}
-        <div className="relative z-10 max-w-none mx-auto px-6 lg:px-4 animate-fade-in">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in">
           <div className="grid lg:grid-cols-12 gap-8 items-center min-h-screen">
-            <div className="lg:col-span-8 lg:col-start-1">
-              <h1 className="mb-6 leading-none text-white font-bold text-6xl lg:text-7xl font-sans tracking-wide">
-                CAMEROON PHASE OF<br />
-                <span className="text-amber-300">ENTERTAINMENT</span>
+            <div className="col-span-full lg:col-span-8 lg:col-start-1 text-center lg:text-left">
+              <h1 className="mb-6 leading-tight text-white font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans tracking-wide">
+                FANARTS<br />
+                <span className="text-amber-300">STUDIO</span>
               </h1>
-              <h2 className="luxury-heading mb-8 leading-tight text-white font-normal text-3xl lg:text-4xl">
+              <h2 className="luxury-heading mb-8 leading-tight text-white font-normal text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                 Crafting <span className="text-amber-300 italic">Visual Stories</span> That Transcend
               </h2>
               <div className="mb-12">
-                <p className="text-lg text-gray-200 leading-relaxed font-serif max-w-md">
+                <p className="text-base sm:text-lg text-gray-200 leading-relaxed font-serif max-w-md mx-auto lg:mx-0">
                   We transform your vision into compelling visual narratives through cinematic storytelling 
                   and uncompromising excellence.
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-6">
-                <button className="btn-primary">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
+                <button className="btn-primary w-full sm:w-auto px-8 py-4">
                   Begin Your Project
                 </button>
-                <button className="btn-secondary">
+                <button className="btn-secondary w-full sm:w-auto px-8 py-4">
                   Explore Portfolio
                 </button>
               </div>
@@ -61,13 +135,13 @@ export default function HomePage() {
               <div className="text-xs tracking-widest text-gray-500 uppercase mb-4 font-medium">
                 About Our Studio
               </div>
-              <h2 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
-                Cameroon Phase of<br />
-                <span className="text-blue-800 italic">Entertainment</span>
+              <h2 className="luxury-heading text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 mb-8 leading-tight">
+                Fanarts<br />
+                <span className="text-blue-800 italic">Studio</span>
               </h2>
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
-                  With over a decade of experience in visual storytelling, we've redefined the boundaries 
+                  With over a decade of experience in visual storytelling, we&apos;ve redefined the boundaries 
                   of video production. Our approach marries artistic vision with technical mastery.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
@@ -81,11 +155,13 @@ export default function HomePage() {
             </div>
             <div className="lg:col-span-6 lg:col-start-1 lg:row-start-1 animate-fade-in">
               <div className="relative">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=700&h=500&fit=crop"
                   alt="Video production team"
                   className="w-full h-auto transform hover:scale-105 transition-transform duration-700"
                   style={{ clipPath: 'polygon(0 0, 100% 0, 95% 100%, 0 100%)' }}
+                  width={700}
+                  height={500}
                 />
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-amber-500 opacity-20"></div>
               </div>
@@ -101,7 +177,7 @@ export default function HomePage() {
             <div className="text-xs tracking-widest text-gray-500 uppercase mb-4 font-medium">
               Our Services
             </div>
-            <h2 className="luxury-heading text-6xl font-normal text-gray-900 mb-6 leading-tight">
+            <h2 className="luxury-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-gray-900 mb-6 leading-tight">
               Excellence in Every<br />
               <span className="text-blue-800 italic">Frame</span>
             </h2>
@@ -144,13 +220,15 @@ export default function HomePage() {
               <div 
                 key={index} 
                 className="service-card-bg"
-                style={{
-                  backgroundImage: `url(${service.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
               >
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  className="object-cover"
+                  quality={75}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
                 <div className="relative z-10 h-full flex flex-col justify-end p-6">
                   <h3 className="text-xl font-semibold text-white mb-3 tracking-wide">
@@ -174,73 +252,56 @@ export default function HomePage() {
               <div className="text-xs tracking-widest text-gray-400 uppercase mb-4 font-medium">
                 Selected Works
               </div>
-              <h2 className="luxury-heading text-7xl font-normal text-white leading-tight">
+              <h2 className="luxury-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white leading-tight">
                 Featured<br />
                 <span className="text-amber-300 italic">Projects</span>
               </h2>
             </div>
             <div className="lg:col-span-5 lg:col-start-8">
-              <p className="text-xl text-gray-300 font-normal leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-300 font-normal leading-relaxed">
                 Explore our latest projects that showcase the intersection of creative vision 
                 and technical excellence.
               </p>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 mb-16">
-            {[
-              {
-                title: "Cinematic Movie Trailer",
-                description: "Epic storytelling with dramatic visuals and professional cinematography",
-                youtubeId: "s7e15NOpsVE",
-                category: "Movie Trailer",
-                colSpan: "lg:col-span-8"
-              },
-              {
-                title: "Music Video Production",
-                description: "Creative visual narrative with artistic direction and dynamic editing",
-                youtubeId: "D65vWyvCnKA",
-                category: "Music Video",
-                colSpan: "lg:col-span-4"
-              },
-              {
-                title: "Short Film",
-                description: "Compelling narrative storytelling with professional production values",
-                youtubeId: "qJrh2KorSSg",
-                category: "Short Film",
-                colSpan: "lg:col-span-4"
-              },
-              {
-                title: "Tutorial Production",
-                description: "Educational content with clear visual communication and expert editing",
-                youtubeId: "h0t5J59hjT8",
-                category: "Tutorial",
-                colSpan: "lg:col-span-8 lg:col-start-5"
-              }
-            ].map((work, index) => (
-              <div key={index} className={`group ${work.colSpan}`}>
-                <div className="video-container mb-6">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${work.youtubeId}?rel=0&modestbranding=1&showinfo=0`}
-                    title={work.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-                <div>
-                  <p className="text-sm text-amber-300 font-medium tracking-wider uppercase mb-2">
-                    {work.category}
-                  </p>
-                  <h3 className="text-xl font-normal text-white luxury-heading mb-2">
-                    {work.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 font-normal leading-relaxed">
-                    {work.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          {loadingFeatured ? (
+            <div className="text-center text-gray-400 py-12">Loading featured projects…</div>
+          ) : featuredProjects.length === 0 ? (
+            <div className="text-center text-gray-400 py-12">No featured projects yet.</div>
+          ) : (
+            <div className="grid lg:grid-cols-12 gap-8 mb-16">
+              {featuredProjects.map((work, index) => {
+                const youtubeId = extractYoutubeId(work.video_url);
+                if (!youtubeId) return null;
+
+                return (
+                  <div key={work.id} className={`group ${getColSpan(index, featuredProjects.length)}`}>
+                    <div className="video-container mb-6">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&showinfo=0`}
+                        title={work.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                      ></iframe>
+                    </div>
+                    <div>
+                      <p className="text-sm text-amber-300 font-medium tracking-wider uppercase mb-2">
+                        {getCategoryDisplayName(work.category)}
+                      </p>
+                      <h3 className="text-xl font-normal text-white luxury-heading mb-2">
+                        {work.title}
+                      </h3>
+                      <p className="text-sm text-gray-400 font-normal leading-relaxed">
+                        {work.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           <div className="text-center">
             <button className="btn-primary text-lg px-16 py-5">
@@ -258,7 +319,7 @@ export default function HomePage() {
               <div className="text-xs tracking-widest text-gray-500 uppercase mb-4 font-medium">
                 Client Testimonials
               </div>
-              <h2 className="luxury-heading text-7xl font-normal text-gray-900 leading-tight">
+              <h2 className="luxury-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-gray-900 leading-tight">
                 What Our<br />
                 <span className="text-blue-800 italic">Clients Say</span>
               </h2>
@@ -268,7 +329,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-3 gap-12">
             {[
               {
-                quote: "Cameroon Phase of Entertainment redefined our brand narrative with extraordinary precision and artistic vision.",
+                quote: "Fanarts Studio redefined our brand narrative with extraordinary precision and artistic vision.",
                 author: "Sarah Johnson",
                 position: "Creative Director, TechFlow",
                 featured: true

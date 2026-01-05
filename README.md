@@ -18,6 +18,25 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Supabase Setup (Production)
+
+This project uses Supabase for:
+- Admin-managed **Team Members**
+- Admin-managed **Portfolio Links**
+- Public **Reviews** submissions
+- Public **Contact** submissions
+
+Create a local `.env.local` (do not commit) with:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+```
+
+Notes:
+- Never expose the Supabase **service role** key in client-side env vars (anything starting with `NEXT_PUBLIC_`).
+- The SQL you need to run in Supabase to create tables + RLS policies will be provided in this repo change-set.
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More

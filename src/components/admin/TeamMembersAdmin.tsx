@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from 'react';
+
+import Image from 'next/image';
 import { supabase } from '../../lib/supabaseClient';
 
 type TeamMember = {
@@ -286,13 +288,15 @@ export default function TeamMembersAdmin() {
 
                 {/* Image Preview */}
                 {imagePreview && (
-                  <div className="relative">
-                    <img
+
+                  <div className="relative w-full h-48 rounded-lg border border-gray-300 overflow-hidden bg-gray-50">
+                    <Image
                       src={imagePreview}
                       alt="Preview"
-                      className="w-full h-48 object-cover rounded-lg border border-gray-300"
-                      loading="lazy"
-                      decoding="async"
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover"
+                      unoptimized
                     />
                     <button
                       type="button"
@@ -369,16 +373,16 @@ export default function TeamMembersAdmin() {
                     {/* Image */}
                     {m.image_url && (
                       <div className="flex-shrink-0">
-                        <img
-                          src={m.image_url}
-                          alt={m.name}
-                          className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
-                          loading="lazy"
-                          decoding="async"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
-                          }}
-                        />
+
+                        <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 bg-gray-100">
+                          <Image
+                            src={m.image_url}
+                            alt={m.name}
+                            fill
+                            sizes="64px"
+                            className="object-cover"
+                          />
+                        </div>
                       </div>
                     )}
 

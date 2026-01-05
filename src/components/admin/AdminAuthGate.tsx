@@ -24,53 +24,59 @@ export default function AdminAuthGate({ children }: AuthGateProps) {
 
   const isSignedIn = useMemo(() => Boolean(sessionUserId), [sessionUserId]);
 
-  async function refreshSessionAndProfile() {
-    setLoading(true);
-    setAuthError(null);
-
-    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-    if (sessionError) {
-      setAuthError(sessionError.message);
-      setSessionUserId(null);
-      setProfile(null);
-      setLoading(false);
-      return;
-    }
-
-    const userId = sessionData.session?.user?.id ?? null;
-    setSessionUserId(userId);
-    if (!userId) {
-      setProfile(null);
-      setLoading(false);
-      return;
-    }
-
-    const { data: profileData, error: profileError } = await supabase
-      .from('profiles')
-      .select('user_id,is_admin')
-      .eq('user_id', userId)
-      .maybeSingle();
-
-    if (profileError) {
-      setAuthError(profileError.message);
-      setProfile(null);
-      setLoading(false);
-      return;
-    }
-
-    setProfile((profileData ?? null) as Profile | null);
-    setLoading(false);
-  }
-
   useEffect(() => {
-    refreshSessionAndProfile();
+    let mounted = true;
+
+    async function refreshSessionAndProfile() {
+      setLoading(true);
+      setAuthError(null);
+
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      if (!mounted) return;
+
+      if (sessionError) {
+        setAuthError(sessionError.message);
+        setSessionUserId(null);
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
+
+      const userId = sessionData.session?.user?.id ?? null;
+      setSessionUserId(userId);
+      if (!userId) {
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
+
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('user_id,is_admin')
+        .eq('user_id', userId)
+        .maybeSingle();
+
+      if (!mounted) return;
+
+      if (profileError) {
+        setAuthError(profileError.message);
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
+
+      setProfile((profileData ?? null) as Profile | null);
+      setLoading(false);
+    }
+
+    void refreshSessionAndProfile();
     const { data: sub } = supabase.auth.onAuthStateChange(() => {
-      refreshSessionAndProfile();
+      void refreshSessionAndProfile();
     });
     return () => {
+      mounted = false;
       sub.subscription.unsubscribe();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSignIn = async (e: React.FormEvent) => {

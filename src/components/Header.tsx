@@ -43,7 +43,7 @@ export default function Header() {
           >
             <Image
               src={logo}
-              alt="Fantasy Arts"
+              alt="Fanarts Studio"
               width={44}
               height={44}
               className="h-11 w-11 object-contain"
@@ -54,7 +54,7 @@ export default function Header() {
                 isScrolled ? 'text-gray-900' : 'text-white'
               }`}
             >
-              Fantasy Arts
+              Fanarts Studio
             </span>
           </Link>
           

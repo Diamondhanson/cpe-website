@@ -88,6 +88,9 @@ export default function HomePage() {
             style={{ filter: 'brightness(0.8) contrast(1.9)' }}
             width={1920}
             height={1080}
+            priority
+            placeholder="blur"
+            sizes="100vw"
           />
         </div>
         
@@ -134,7 +137,7 @@ export default function HomePage() {
               </div>
               <h2 className="luxury-heading text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 mb-8 leading-tight">
                 Fanarts<br />
-                <span className="text-blue-800 italic">production</span>
+                <span className="text-blue-800 italic">Studio</span>
               </h2>
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
@@ -217,13 +220,15 @@ export default function HomePage() {
               <div 
                 key={index} 
                 className="service-card-bg"
-                style={{
-                  backgroundImage: `url(${service.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
               >
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  className="object-cover"
+                  quality={75}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
                 <div className="relative z-10 h-full flex flex-col justify-end p-6">
                   <h3 className="text-xl font-semibold text-white mb-3 tracking-wide">
@@ -278,6 +283,7 @@ export default function HomePage() {
                         title={work.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
+                        loading="lazy"
                       ></iframe>
                     </div>
                     <div>
@@ -323,7 +329,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-3 gap-12">
             {[
               {
-                quote: "Fantasy Arts production redefined our brand narrative with extraordinary precision and artistic vision.",
+                quote: "Fanarts Studio redefined our brand narrative with extraordinary precision and artistic vision.",
                 author: "Sarah Johnson",
                 position: "Creative Director, TechFlow",
                 featured: true

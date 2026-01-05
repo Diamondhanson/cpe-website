@@ -286,6 +286,7 @@ export default function PortfolioPage() {
                     title={item.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
+                    loading="lazy"
                     className="w-full h-64"
                   ></iframe>
                       ) : (
@@ -373,6 +374,7 @@ export default function PortfolioPage() {
                   title="Award Winning Documentary"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  loading="lazy"
                   className="w-full h-96"
                 ></iframe>
               </div>
@@ -509,7 +511,7 @@ export default function PortfolioPage() {
                   onChange={handleReviewInputChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-vertical"
-                  placeholder="Share your experience working with Fantasy Arts production. What made your project special?"
+                  placeholder="Share your experience working with Fanarts Studio. What made your project special?"
                 ></textarea>
               </div>
 

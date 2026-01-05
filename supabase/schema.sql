@@ -1,7 +1,7 @@
 -- =========================
 -- Supabase schema + RLS
 -- =========================
--- Run this in Supabase SQL Editor (project: Fantasy Arts / CPE website)
+-- Run this in Supabase SQL Editor (project: Fanarts Studio / CPE website)
 -- Safe to run multiple times where possible.
 
 -- Extensions (Supabase usually has pgcrypto already)

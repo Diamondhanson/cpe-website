@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="lg:col-span-5">
             <div className="mb-8">
               <h3 className="luxury-heading text-3xl font-normal text-white mb-4 tracking-wide">
-                Fantasy Arts production
+                Fanarts Studio
               </h3>
               <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-amber-400 mb-6"></div>
               <p className="text-gray-300 leading-relaxed font-normal text-lg mb-6">
@@ -146,7 +146,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-1">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm font-normal mb-4 md:mb-0">
-              © 2024 Fantasy Arts production. All rights reserved.
+              © 2024 Fanarts Studio. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Privacy Policy</a>

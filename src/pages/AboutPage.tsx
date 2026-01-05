@@ -78,7 +78,7 @@ export default function AboutPage() {
             <span className="text-amber-300 italic">Creative Journey</span>
           </h1>
           <p className="text-xl text-gray-200 leading-relaxed font-normal max-w-2xl mx-auto">
-            Discover the story behind Fantasy Arts production and the passionate team 
+            Discover the story behind Fanarts Studio and the passionate team 
             that brings your visions to life through exceptional storytelling.
           </p>
         </div>
@@ -98,7 +98,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
-                  Founded in 2014, Fantasy Arts production emerged from a simple yet powerful vision: 
+                  Founded in 2014, Fanarts Studio emerged from a simple yet powerful vision: 
                   to transform the landscape of visual storytelling in Central Africa. What began as a small 
                   collective of passionate filmmakers has evolved into a premier production house renowned 
                   for its artistic integrity and technical excellence.
@@ -173,18 +173,18 @@ export default function AboutPage() {
                 <p className="text-lg text-gray-300 leading-relaxed font-normal">
                   Chuzih Herbert&apos;s journey began with a camera in hand and a vision that would eventually 
                   reshape the entertainment landscape of Central Africa. With over 10 years of experience 
-                  in cinematic storytelling, he founded Fantasy Arts production on the principle 
+                  in cinematic storytelling, he founded Fanarts Studio on the principle 
                   that every story deserves to be told with passion and precision.
                 </p>
                 <p className="text-lg text-gray-300 leading-relaxed font-normal">
-                  Under his leadership, Fantasy Arts has evolved from a small creative collective into a powerhouse 
+                  Under his leadership, Fanarts Studio has evolved from a small creative collective into a powerhouse 
                   of visual innovation. Chuzih&apos;s unique approach combines traditional African storytelling 
                   techniques with cutting-edge production methods, creating a distinctive voice that resonates 
                   both locally and internationally.
                 </p>
                 <p className="text-lg text-gray-300 leading-relaxed font-normal">
                   His commitment to nurturing emerging talent and fostering creative collaboration has made 
-                  Fantasy Arts not just a production company, but a catalyst for the next generation of African 
+                  Fanarts Studio not just a production company, but a catalyst for the next generation of African 
                   filmmakers and content creators.
                 </p>
               </div>

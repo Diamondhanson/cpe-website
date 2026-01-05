@@ -291,6 +291,8 @@ export default function TeamMembersAdmin() {
                       src={imagePreview}
                       alt="Preview"
                       className="w-full h-48 object-cover rounded-lg border border-gray-300"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <button
                       type="button"
@@ -371,6 +373,8 @@ export default function TeamMembersAdmin() {
                           src={m.image_url}
                           alt={m.name}
                           className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
+                          loading="lazy"
+                          decoding="async"
                           onError={(e) => {
                             (e.target as HTMLImageElement).style.display = 'none';
                           }}

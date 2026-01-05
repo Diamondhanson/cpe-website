@@ -1,6 +1,6 @@
 # Components
 
-This directory contains reusable UI components for the Fantasy Arts website.
+This directory contains reusable UI components for the Fanarts Studio website.
 
 ## Available Components
 

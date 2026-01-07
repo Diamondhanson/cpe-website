@@ -6,6 +6,16 @@ import Layout from '../components/Layout';
 import { supabase } from '../lib/supabaseClient';
 
 export default function ContactPage() {
+  const instagramUrl = "https://www.instagram.com/chuzihofficial?igsh=bHkyY3hwN2d4ZHl2";
+  const facebookUrl = "https://www.facebook.com/share/1bG6NRUfFW/?mibextid=wwXIfr";
+  // TODO: Provide these when ready
+  const vimeoUrl = "";
+  const linkedinUrl = "";
+
+  const email = "fanartscompanylimited@gmail.com";
+  const phoneDisplay = "+237 6 79 95 58 07";
+  const phoneTel = "+237679955807";
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -142,7 +152,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Phone</h3>
-                    <p className="text-gray-600">+237 123 456 789</p>
+                    <a className="text-gray-600 hover:underline" href={`tel:${phoneTel}`}>
+                      {phoneDisplay}
+                    </a>
                   </div>
                 </div>
 
@@ -154,7 +166,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
-                    <p className="text-gray-600">hello@fantasyartsproduction.com</p>
+                    <a className="text-gray-600 hover:underline" href={`mailto:${email}`}>
+                      {email}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -164,7 +178,7 @@ export default function ContactPage() {
                 <h4 className="text-lg font-semibold text-gray-900 mb-4">Follow Us</h4>
                 <div className="flex space-x-6">
                   <a
-                    href="https://instagram.com/fantasyartsproduction"
+                    href={instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -174,7 +188,7 @@ export default function ContactPage() {
                     </svg>
                   </a>
                   <a
-                    href="https://facebook.com/fantasyartsproduction"
+                    href={facebookUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
@@ -184,20 +198,34 @@ export default function ContactPage() {
                     </svg>
                   </a>
                   <a
-                    href="https://twitter.com/fantasyartsprod"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
+                    href={vimeoUrl || "#"}
+                    target={vimeoUrl ? "_blank" : undefined}
+                    rel={vimeoUrl ? "noopener noreferrer" : undefined}
+                    aria-disabled={!vimeoUrl}
+                    onClick={(e) => {
+                      if (!vimeoUrl) e.preventDefault();
+                    }}
+                    className={`w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white transition-transform duration-300 ${
+                      vimeoUrl ? "hover:scale-110" : "opacity-50 cursor-not-allowed"
+                    }`}
+                    title={vimeoUrl ? "Vimeo" : "Vimeo (add your link)"}
                   >
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M23.977 6.026c-.105 2.338-1.74 5.54-4.904 9.606-3.27 4.252-6.036 6.377-8.297 6.377-1.401 0-2.586-1.292-3.555-3.876L4.36 7.628c-.532-1.93-1.105-2.895-1.718-2.895-.132 0-.594.28-1.389.84L.01 3.962c.924-.812 1.83-1.623 2.716-2.435C3.934.481 4.84.029 5.444.01c1.427-.137 2.308.84 2.643 2.932.362 2.258.613 3.663.753 4.214.419 1.901.881 2.852 1.386 2.852.39 0 .977-.617 1.762-1.852.784-1.234 1.204-2.171 1.259-2.81.112-1.064-.309-1.596-1.263-1.596-.45 0-.913.104-1.388.309.924-3.025 2.692-4.493 5.304-4.404 1.935.056 2.842 1.31 2.719 3.761z" />
                     </svg>
                   </a>
                   <a
-                    href="https://linkedin.com/company/fantasyartsproduction"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
+                    href={linkedinUrl || "#"}
+                    target={linkedinUrl ? "_blank" : undefined}
+                    rel={linkedinUrl ? "noopener noreferrer" : undefined}
+                    aria-disabled={!linkedinUrl}
+                    onClick={(e) => {
+                      if (!linkedinUrl) e.preventDefault();
+                    }}
+                    className={`w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white transition-transform duration-300 ${
+                      linkedinUrl ? "hover:scale-110" : "opacity-50 cursor-not-allowed"
+                    }`}
+                    title={linkedinUrl ? "LinkedIn" : "LinkedIn (add your link)"}
                   >
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>

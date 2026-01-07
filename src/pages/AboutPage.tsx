@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Layout from '../components/Layout';
 import leaderImage from '../assets/images/chuzih.jpg';
 import { supabase } from '../lib/supabaseClient';
@@ -149,6 +150,12 @@ export default function AboutPage() {
                 />
                 <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-br from-blue-500 to-amber-400 opacity-30 rounded-2xl"></div>
                 <div className="absolute -top-8 -left-8 w-24 h-24 bg-gradient-to-br from-amber-500 to-blue-500 opacity-25 rounded-2xl"></div>
+              </div>
+
+              <div className="mt-10 flex justify-center lg:justify-start">
+                <Link href="/director" className="btn-secondary px-12 py-4">
+                  View portfolio
+                </Link>
               </div>
             </div>
 

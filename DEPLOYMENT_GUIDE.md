@@ -348,3 +348,5 @@ You still use your Namecheap domain, just point it to Vercel's hosting.
 - Vercel Docs: [vercel.com/docs](https://vercel.com/docs)
 - Next.js Deployment: [nextjs.org/docs/deployment](https://nextjs.org/docs/deployment)
 
+
+

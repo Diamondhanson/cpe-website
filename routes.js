@@ -34,6 +34,12 @@ const routes = {
     name: 'Contact',
     component: 'ContactPage',
     isDefault: false
+  },
+  director: {
+    path: '/director',
+    name: 'Director',
+    component: 'DirectorPortfolioPage',
+    isDefault: false
   }
   // Additional routes can be added here
 };

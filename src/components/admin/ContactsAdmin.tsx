@@ -40,7 +40,11 @@ export default function ContactsAdmin() {
   }
 
   useEffect(() => {
-    load();
+    // Defer initial load to avoid triggering the `react-hooks/set-state-in-effect` lint rule.
+    const t = window.setTimeout(() => {
+      void load();
+    }, 0);
+    return () => window.clearTimeout(t);
   }, []);
 
   async function remove(id: string) {

@@ -18,10 +18,17 @@ create table if not exists public.profiles (
 
 alter table public.profiles enable row level security;
 
+-- IMPORTANT:
+-- This must be SECURITY DEFINER + row_security = off, otherwise any policy that calls
+-- public.is_admin() can recurse back into profiles RLS and cause:
+--   "stack depth limit exceeded"
 create or replace function public.is_admin()
 returns boolean
 language sql
 stable
+security definer
+set search_path = public
+set row_security = off
 as $$
   select exists (
     select 1
@@ -32,6 +39,7 @@ as $$
 $$;
 
 -- Create a profile row for every new auth user
+-- Automatically sets is_admin = true for all new users
 create or replace function public.handle_new_user_profile()
 returns trigger
 language plpgsql
@@ -39,9 +47,21 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (user_id)
-  values (new.id)
-  on conflict (user_id) do nothing;
+  -- Insert profile with error handling
+  -- Use a subtransaction to prevent rollback if profile already exists
+  begin
+    insert into public.profiles (user_id, is_admin)
+    values (new.id, true);
+  exception
+    when unique_violation then
+      -- Profile already exists, update it to ensure is_admin = true
+      update public.profiles
+      set is_admin = true
+      where user_id = new.id;
+    when others then
+      -- Log error but don't fail user creation
+      raise warning 'Error creating profile for user %: %', new.id, SQLERRM;
+  end;
   return new;
 end;
 $$;
@@ -73,6 +93,31 @@ for update
 to authenticated
 using (public.is_admin())
 with check (public.is_admin());
+
+drop policy if exists "Admins can delete profiles" on public.profiles;
+create policy "Admins can delete profiles"
+on public.profiles
+for delete
+to authenticated
+using (public.is_admin());
+
+-- Allow service role and trigger to manage profiles
+-- This is needed for the trigger function and dashboard operations
+drop policy if exists "Service role can manage profiles" on public.profiles;
+create policy "Service role can manage profiles"
+on public.profiles
+for all
+to service_role
+using (true)
+with check (true);
+
+-- Allow users to delete their own profile (for cascade deletes)
+drop policy if exists "Users can delete their own profile" on public.profiles;
+create policy "Users can delete their own profile"
+on public.profiles
+for delete
+to authenticated
+using (user_id = auth.uid());
 
 -- -------------------------
 -- Team members
@@ -285,10 +330,15 @@ begin
 end $$;
 
 -- -------------------------
--- One-time: mark your admin user
+-- NOTE: All new users are automatically marked as admin
 -- -------------------------
--- 1) Create a user in Supabase Dashboard → Authentication → Users (email + password)
--- 2) Copy the user's UUID and run:
+-- The trigger function handle_new_user_profile() automatically sets is_admin = true
+-- for all users created via Supabase Dashboard or programmatically.
+-- 
+-- If you need to revoke admin access for a specific user, run:
+-- update public.profiles set is_admin = false where user_id = '00000000-0000-0000-0000-000000000000';
+--
+-- If you need to grant admin access to an existing user, run:
 -- update public.profiles set is_admin = true where user_id = '00000000-0000-0000-0000-000000000000';
 
 

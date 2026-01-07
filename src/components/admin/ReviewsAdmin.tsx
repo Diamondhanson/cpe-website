@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 
 type ReviewRow = {
@@ -18,7 +18,7 @@ export default function ReviewsAdmin() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  async function load() {
+  const load = useCallback(async () => {
     setLoading(true);
     setError(null);
 
@@ -36,15 +36,21 @@ export default function ReviewsAdmin() {
 
     setItems((data ?? []) as ReviewRow[]);
     setLoading(false);
-  }
+  }, []);
 
   useEffect(() => {
-    // Defer initial load to avoid triggering the `react-hooks/set-state-in-effect` lint rule.
-    const t = window.setTimeout(() => {
-      void load();
-    }, 0);
-    return () => window.clearTimeout(t);
-  }, []);
+    let mounted = true;
+    
+    async function initialLoad() {
+      await load();
+    }
+    
+    void initialLoad();
+    
+    return () => {
+      mounted = false;
+    };
+  }, [load]);
 
   async function toggleApproved(id: string, next: boolean) {
     setError(null);

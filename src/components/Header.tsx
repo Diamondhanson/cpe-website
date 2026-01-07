@@ -66,8 +66,8 @@ export default function Header() {
                 href={item.href}
                 className={`nav-link transition-colors duration-500 ${
                   pathname === item.href 
-                    ? (isScrolled ? 'text-blue-600' : 'text-amber-300') 
-                    : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-amber-300')
+                    ? (isScrolled ? 'text-blue-social' : 'text-orange-accent') 
+                    : (isScrolled ? 'text-gray-700 hover:text-blue-social' : 'text-white hover:text-orange-accent')
                 }`}
               >
                 {item.name}
@@ -110,10 +110,10 @@ export default function Header() {
                 href={item.href}
                 className={`block px-4 py-3 text-base font-medium transition-colors duration-300 ${
                   pathname === item.href
-                    ? (isScrolled ? 'text-blue-600 bg-blue-50' : 'text-amber-300 bg-white/20')
+                    ? (isScrolled ? 'text-blue-social bg-blue-50' : 'text-orange-accent bg-white/20')
                     : (isScrolled 
-                        ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-50' 
-                        : 'text-white hover:text-amber-300 hover:bg-white/10')
+                        ? 'text-gray-700 hover:text-blue-social hover:bg-gray-50' 
+                        : 'text-white hover:text-orange-accent hover:bg-white/10')
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >

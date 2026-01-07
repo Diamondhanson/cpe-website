@@ -33,7 +33,7 @@ export default function AdminPage() {
               type="button"
               onClick={() => setTab(t.key)}
               className={`px-4 py-2 text-sm font-medium transition-colors ${
-                tab === t.key ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
+                tab === t.key ? 'bg-blue-social text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
               }`}
             >
               {t.label}

@@ -140,7 +140,7 @@ export default function DirectorPortfolioPage() {
                 <h1 className="luxury-heading text-4xl sm:text-5xl md:text-6xl font-normal text-white leading-tight">
                   {directorName}
                 </h1>
-                <p className="text-amber-300 text-sm font-medium tracking-wider uppercase mt-3">
+                <p className="text-orange-accent text-sm font-medium tracking-wider uppercase mt-3">
                   Director’s Reel
                 </p>
               </div>
@@ -271,7 +271,7 @@ export default function DirectorPortfolioPage() {
                 </div>
                 <h2 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
                   Directorial<br />
-                  <span className="text-blue-800 italic">Statement</span>
+                  <span className="text-blue-title italic">Statement</span>
                 </h2>
                 <div className="space-y-6">
                   <p className="text-lg text-gray-700 leading-relaxed font-normal">

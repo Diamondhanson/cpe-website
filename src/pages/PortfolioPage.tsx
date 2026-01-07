@@ -199,7 +199,7 @@ export default function PortfolioPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-fade-in">
           <h1 className="luxury-heading mb-6 leading-none text-white font-normal text-6xl lg:text-7xl">
             Our Creative<br />
-            <span className="text-amber-300 italic">Portfolio</span>
+            <span className="text-orange-accent italic">Portfolio</span>
           </h1>
           <p className="text-xl text-gray-200 leading-relaxed font-normal max-w-2xl mx-auto">
             Explore our collection of exceptional video productions that showcase 
@@ -220,7 +220,7 @@ export default function PortfolioPage() {
             ].map((stat, index) => (
               <div key={index} className="animate-fade-in">
                 <div className="text-4xl mb-4">{stat.icon}</div>
-                <div className="text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
+                <div className="text-4xl font-bold text-blue-social mb-2">{stat.number}</div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
               </div>
             ))}
@@ -238,7 +238,7 @@ export default function PortfolioPage() {
         </div>
             <h2 className="luxury-heading text-6xl font-normal text-gray-900 mb-8 leading-tight">
               Excellence in<br />
-              <span className="text-blue-800 italic">Every Project</span>
+              <span className="text-blue-title italic">Every Project</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-normal">
               Discover our diverse portfolio spanning commercial productions, music videos, 
@@ -254,7 +254,7 @@ export default function PortfolioPage() {
                  onClick={() => handleCategoryChange(category)}
                  className={`px-8 py-3 font-medium transition-all duration-300 ${
                    activeCategory === category
-                     ? 'bg-blue-600 text-white shadow-lg'
+                     ? 'bg-blue-social text-white shadow-lg'
                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                  }`}
                >
@@ -308,7 +308,7 @@ export default function PortfolioPage() {
                           {tags.map((tag) => (
                       <span
                               key={tag}
-                        className="text-xs px-3 py-1 bg-blue-100 text-blue-600 rounded-full font-medium"
+                        className="text-xs px-3 py-1 bg-blue-100 text-blue-social rounded-full font-medium"
                       >
                         {tag}
                       </span>
@@ -316,7 +316,7 @@ export default function PortfolioPage() {
                   </div>
                       )}
                   
-                  <h3 className="text-xl font-normal text-gray-900 luxury-heading mb-3 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-normal text-gray-900 luxury-heading mb-3 group-hover:text-blue-social transition-colors">
                     {item.title}
                   </h3>
                   
@@ -362,7 +362,7 @@ export default function PortfolioPage() {
             </div>
             <h2 className="luxury-heading text-5xl font-normal text-white mb-8 leading-tight">
               Featured<br />
-              <span className="text-amber-300 italic">Masterpiece</span>
+              <span className="text-orange-accent italic">Masterpiece</span>
             </h2>
             </div>
             
@@ -383,14 +383,14 @@ export default function PortfolioPage() {
             <div className="lg:col-span-4">
               <div className="flex items-center mb-6">
                 <span className="text-2xl mr-3">🏆</span>
-                <span className="text-amber-300 font-medium text-sm uppercase tracking-wider">
+                <span className="text-orange-accent font-medium text-sm uppercase tracking-wider">
                   Best Documentary 2023
                 </span>
               </div>
               
               <h3 className="luxury-heading text-3xl font-normal text-white mb-6 leading-tight">
                 Cultural Heritage<br />
-                <span className="text-amber-300 italic">Documentary</span>
+                <span className="text-orange-accent italic">Documentary</span>
               </h3>
               
               <p className="text-gray-300 leading-relaxed font-normal mb-8">
@@ -427,7 +427,7 @@ export default function PortfolioPage() {
             </div>
             <h2 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
               Leave a<br />
-              <span className="text-blue-800 italic">Review</span>
+              <span className="text-blue-title italic">Review</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-normal">
               We&apos;d love to hear about your experience working with us. Your feedback helps us 
@@ -549,7 +549,7 @@ export default function PortfolioPage() {
             </div>
             <h2 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
               What Our<br />
-              <span className="text-blue-800 italic">Clients Say</span>
+              <span className="text-blue-title italic">Clients Say</span>
             </h2>
           </div>
           
@@ -568,10 +568,10 @@ export default function PortfolioPage() {
                 return (
                   <div
                     key={review.id}
-                    className="bg-white p-6 rounded-lg shadow-lg animate-slide-up border-l-4 border-blue-600"
+                    className="bg-white p-6 rounded-lg shadow-lg animate-slide-up border-l-4 border-blue-social"
                   >
                     <div className="flex items-start space-x-4">
-                      <div className="w-16 h-16 rounded-full flex-shrink-0 bg-blue-600 text-white flex items-center justify-center font-semibold">
+                      <div className="w-16 h-16 rounded-full flex-shrink-0 bg-blue-social text-white flex items-center justify-center font-semibold">
                         {initials}
                       </div>
                       <div className="flex-1">

@@ -151,7 +151,7 @@ export default function AdminAuthGate({ children }: AuthGateProps) {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 px-4 font-semibold hover:bg-blue-700 transition-colors"
+              className="w-full bg-blue-social text-white py-3 px-4 font-semibold hover:bg-blue-social/90 transition-colors"
             >
               Sign In
             </button>

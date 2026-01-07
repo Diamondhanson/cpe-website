@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Fanarts Studio",
-  description: "Computer and Physical Engineering Website",
+  description: "Crafting Visual Stories That Transcend",
 };
 
 export default function RootLayout({

@@ -29,7 +29,7 @@ export default function ServicesPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-fade-in">
           <h1 className="luxury-heading mb-6 leading-none text-white font-normal text-6xl lg:text-7xl">
             Our Creative<br />
-            <span className="text-amber-300 italic">Services</span>
+            <span className="text-orange-accent italic">Services</span>
           </h1>
           <p className="text-xl text-gray-200 leading-relaxed font-normal max-w-2xl mx-auto">
             Comprehensive video production solutions tailored to bring your vision to life 
@@ -47,7 +47,7 @@ export default function ServicesPage() {
             </div>
             <h2 className="luxury-heading text-6xl font-normal text-gray-900 mb-8 leading-tight">
               Excellence in Every<br />
-              <span className="text-blue-800 italic">Frame</span>
+              <span className="text-blue-title italic">Frame</span>
           </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-normal">
               From concept to completion, we offer comprehensive video production services 
@@ -67,7 +67,7 @@ export default function ServicesPage() {
               </div>
               <h3 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
                 Commercial<br />
-                <span className="text-blue-800 italic">Production</span>
+                <span className="text-blue-title italic">Production</span>
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed font-normal mb-8">
                 Transform your brand narrative through sophisticated visual storytelling that drives engagement 
@@ -77,21 +77,21 @@ export default function ServicesPage() {
               
               <div className="space-y-6 mb-10">
                 <div className="flex items-start space-x-4">
-                  <div className="w-3 h-3 bg-blue-600 rounded-full mt-2"></div>
+                  <div className="w-3 h-3 bg-blue-social rounded-full mt-2"></div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Brand Films</h4>
                     <p className="text-gray-600">Cinematic storytelling that captures your brand&apos;s essence and values.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-3 h-3 bg-blue-600 rounded-full mt-2"></div>
+                  <div className="w-3 h-3 bg-blue-social rounded-full mt-2"></div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Product Videos</h4>
                     <p className="text-gray-600">Dynamic showcases that highlight features and benefits in compelling ways.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-3 h-3 bg-blue-600 rounded-full mt-2"></div>
+                  <div className="w-3 h-3 bg-blue-social rounded-full mt-2"></div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Corporate Stories</h4>
                     <p className="text-gray-600">Professional content for internal communications and corporate messaging.</p>
@@ -129,7 +129,7 @@ export default function ServicesPage() {
               </div>
               <h3 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
                 Event<br />
-                <span className="text-blue-800 italic">Documentation</span>
+                <span className="text-blue-title italic">Documentation</span>
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed font-normal mb-8">
                 Comprehensive coverage that captures the essence and emotion of your most important moments. 
@@ -191,7 +191,7 @@ export default function ServicesPage() {
               </div>
               <h3 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
                 Documentary<br />
-                <span className="text-blue-800 italic">Films</span>
+                <span className="text-blue-title italic">Films</span>
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed font-normal mb-8">
                 Compelling narratives that tell authentic stories with emotional depth. Our documentary 
@@ -201,11 +201,11 @@ export default function ServicesPage() {
               
               <div className="grid grid-cols-2 gap-6 mb-10">
                 <div className="text-center p-6 bg-gray-50 rounded-lg">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">15+</div>
+                  <div className="text-3xl font-bold text-blue-social mb-2">15+</div>
                   <div className="text-sm text-gray-600">Documentaries Produced</div>
                 </div>
                 <div className="text-center p-6 bg-gray-50 rounded-lg">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">5</div>
+                  <div className="text-3xl font-bold text-blue-social mb-2">5</div>
                   <div className="text-sm text-gray-600">Awards Received</div>
                 </div>
               </div>
@@ -239,7 +239,7 @@ export default function ServicesPage() {
             </div>
             <h3 className="luxury-heading text-5xl font-normal text-white mb-8 leading-tight">
               Music Videos &<br />
-              <span className="text-amber-300 italic">Post-Production</span>
+              <span className="text-orange-accent italic">Post-Production</span>
             </h3>
           </div>
 
@@ -326,7 +326,7 @@ export default function ServicesPage() {
             </div>
             <h3 className="luxury-heading text-6xl font-normal text-gray-900 mb-8 leading-tight">
               From Concept to<br />
-              <span className="text-blue-800 italic">Completion</span>
+              <span className="text-blue-title italic">Completion</span>
             </h3>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-normal">
               Every project follows our proven methodology that ensures exceptional results and seamless collaboration.
@@ -361,13 +361,13 @@ export default function ServicesPage() {
                 }
               ].map((item, index) => (
                 <div key={index} className="text-center animate-slide-up relative">
-                  <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6 relative z-10 shadow-lg">
+                  <div className="w-16 h-16 bg-blue-social text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6 relative z-10 shadow-lg">
                     {item.step}
                   </div>
                   {/* Arrow - only show between steps, not after the last one */}
                   {index < 3 && (
                     <div className="absolute top-8 -right-4 transform translate-x-1/2 hidden lg:block">
-                      <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-6 h-6 text-blue-social" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>

@@ -5,6 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import portraitImage from "../assets/images/chuzih.jpg";
+import canvaIcon from "../assets/images/canva-icon.png";
+import adobePremiereIcon from "../assets/images/Adobe_Premiere.png";
+import afterEffectsIcon from "../assets/images/adobe-after-effects-icon.png";
+import davinciResolveIcon from "../assets/images/DaVinci_Resolve_Studio.png";
+import photoshopIcon from "../assets/images/Photoshop.png";
 
 type Project = {
   title: string;
@@ -78,7 +83,30 @@ function LazyYouTubeEmbed({
 }
 
 export default function DirectorPortfolioPage() {
-  const directorName = "CHUZIH HERBERT";
+  const directorName = "CHUZIH DADIDO";
+  const clientsWorkedWith = [
+    "Grace Decca",
+    "Pascal Siakam",
+    "Mimie",
+    "Pricewaterhousecoopers",
+    "Stevens music",
+    "Kocee",
+    "Akumba Music",
+    "Axcel Merryl",
+    "Tema Crush",
+    "Krys M",
+    "Phillbill",
+    "Dj Ararat",
+    "Aloch 237",
+    "Afriland First Bank",
+  ];
+  const softwareMastered = [
+    { name: "Adobe Premiere Pro", icon: adobePremiereIcon },
+    { name: "DaVinci Resolve", icon: davinciResolveIcon },
+    { name: "Adobe After Effects", icon: afterEffectsIcon },
+    { name: "Adobe Photoshop", icon: photoshopIcon },
+    { name: "Canva", icon: canvaIcon },
+  ] as const;
 
   const projects: Project[] = [
     {
@@ -90,7 +118,7 @@ export default function DirectorPortfolioPage() {
     },
     {
       title: "Commercial — Precision & Pace",
-      role: "Writer/Director",
+      role: "Writer/chuzih",
       thumbnail:
         "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200&h=800&fit=crop&auto=format&q=80",
       href: "https://www.youtube.com/",
@@ -118,7 +146,7 @@ export default function DirectorPortfolioPage() {
     },
     {
       title: "Short Film — Quiet Tension",
-      role: "Writer/Director",
+      role: "Writer/chuzih",
       thumbnail:
         "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=1200&h=800&fit=crop&auto=format&q=80",
       href: "https://www.youtube.com/",
@@ -140,17 +168,12 @@ export default function DirectorPortfolioPage() {
                 <h1 className="luxury-heading text-4xl sm:text-5xl md:text-6xl font-normal text-white leading-tight">
                   {directorName}
                 </h1>
-                <p className="text-orange-accent text-sm font-medium tracking-wider uppercase mt-3">
+                <p className="text-amber-300 text-sm font-medium tracking-wider uppercase mt-3">
                   Director’s Reel
                 </p>
               </div>
 
-              <Link
-                href="/"
-                className="hidden sm:inline-flex btn-secondary px-8 py-4"
-              >
-                Back to Home
-              </Link>
+              
             </div>
 
             <div className="grid lg:grid-cols-12 gap-10 items-start">
@@ -167,19 +190,22 @@ export default function DirectorPortfolioPage() {
                     A Cinematic Approach
                   </h2>
                   <p className="text-gray-200 leading-relaxed font-normal">
-                    I direct with a focus on performance, rhythm, and detail—balancing bold visual
+                    I direct with a focus on performance, rhythm, and detail, balancing bold visuals
                     language with clean narrative intent. From commercials to documentary work, my goal is
-                    always the same: create images that feel inevitable.
+                    always the same: create images that feel relatable and true.
                   </p>
-                  <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                    <Link href="/contact" className="btn-primary px-10 py-4 text-center">
+                  <div className="mt-8 space-y-3">
+                    <a href="mailto:directorchuzih@gmail.com" className="btn-primary px-10 py-4 text-center w-full">
                       Contact
-                    </Link>
-                    <a
-                      href="#work"
-                      className="btn-secondary px-10 py-4 text-center"
+                    </a>
+                    <a 
+                      href="https://wa.me/237675848228" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="btn-secondary px-10 py-4 text-center w-full flex items-center justify-center gap-2"
                     >
-                      View Work
+                     
+                    Contact  WhatsApp
                     </a>
                   </div>
                 </div>
@@ -248,6 +274,51 @@ export default function DirectorPortfolioPage() {
           </div>
         </section>
 
+        {/* Software Mastered */}
+        <section className="relative py-24 gradient-dark overflow-hidden">
+          <div className="absolute inset-0 gradient-overlay" />
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-14">
+              <div className="text-xs tracking-widest text-gray-300 uppercase mb-4 font-medium">
+                Tools
+              </div>
+              <h2 className="luxury-heading text-5xl font-normal text-white leading-tight">
+                Software Mastered
+              </h2>
+              <p className="text-lg text-gray-200 max-w-3xl mx-auto leading-relaxed font-normal mt-4">
+                The core tools used across editing, color, motion design, and post-production.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {softwareMastered.map((tool) => (
+                <div
+                  key={tool.name}
+                  className="min-w-0 rounded-sm border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl p-2.5 flex items-center gap-2"
+                >
+                  <div className="flex-none h-18 w-18 rounded-sm bg-white/10 border border-white/15 flex items-center justify-center">
+                    <Image
+                      src={tool.icon}
+                      alt={`${tool.name} logo`}
+                      width={60}
+                      height={60}
+                      className="h-16 w-16 object-contain"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-base font-semibold text-white tracking-wide leading-snug whitespace-normal break-words" title={tool.name}>
+                      {tool.name}
+                    </div>
+                    <div className="text-xs text-gray-300 tracking-widest uppercase mt-1">
+                      Post / Editing
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Director Bio */}
         <section className="py-24 bg-gray-50 diagonal-top diagonal-bottom">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -271,7 +342,7 @@ export default function DirectorPortfolioPage() {
                 </div>
                 <h2 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
                   Directorial<br />
-                  <span className="text-blue-title italic">Statement</span>
+                  <span className="text-blue-800 italic">Statement</span>
                 </h2>
                 <div className="space-y-6">
                   <p className="text-lg text-gray-700 leading-relaxed font-normal">
@@ -285,35 +356,71 @@ export default function DirectorPortfolioPage() {
                   </p>
                 </div>
 
-                <div className="mt-10 grid md:grid-cols-2 gap-8">
-                  <div className="bg-white p-8 rounded-sm border border-gray-200 shadow-lg">
-                    <h3 className="luxury-heading text-2xl font-normal text-gray-900 mb-4">
-                      Selected Clients
-                    </h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>Brand / Client 01</li>
-                      <li>Brand / Client 02</li>
-                      <li>Brand / Client 03</li>
-                      <li>Brand / Client 04</li>
-                    </ul>
-                  </div>
-                  <div className="bg-white p-8 rounded-sm border border-gray-200 shadow-lg">
-                    <h3 className="luxury-heading text-2xl font-normal text-gray-900 mb-4">
-                      Specialties
-                    </h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>Commercials</li>
-                      <li>Music Videos</li>
-                      <li>Documentary</li>
-                      <li>Narrative Shorts</li>
-                    </ul>
-                  </div>
-                </div>
-
                 <div className="mt-10">
                   <Link href="/contact" className="btn-primary px-12 py-4">
                     Contact the Director
                   </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Clients + Specialties */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-14">
+              <div className="text-xs tracking-widest text-gray-500 uppercase mb-4 font-medium">
+                Credits
+              </div>
+              <h2 className="luxury-heading text-5xl font-normal text-gray-900 leading-tight">
+                Clients & Specialties
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-normal mt-4">
+                A selection of artists and brands, plus the types of work I specialize in.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-12 gap-10 items-start">
+              <div className="lg:col-span-8">
+                <div className="bg-white rounded-sm border border-gray-200 shadow-lg p-10">
+                  <h3 className="luxury-heading text-3xl font-normal text-gray-900 mb-6">
+                    Selected Clients
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+                    {clientsWorkedWith.map((client) => (
+                      <div
+                        key={client}
+                        className="min-w-0 flex items-center gap-3 rounded-sm border border-gray-200 bg-white px-4 py-3 text-gray-800 shadow-sm"
+                      >
+                        <span className="h-2 w-2 flex-none rounded-full bg-blue-600" aria-hidden="true" />
+                        <span
+                          className="min-w-0 truncate text-sm font-medium tracking-wide"
+                          title={client}
+                        >
+                          {client}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4">
+                <div className="bg-white rounded-sm border border-gray-200 shadow-lg p-10">
+                  <h3 className="luxury-heading text-3xl font-normal text-gray-900 mb-6">
+                    Specialties
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {["Commercials", "Music Videos", "Documentary", "Narrative Shorts"].map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex items-center rounded-sm border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-800"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

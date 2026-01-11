@@ -36,7 +36,7 @@ const routes = {
     isDefault: false
   },
   director: {
-    path: '/director',
+    path: '/chuzih',
     name: 'Director',
     component: 'DirectorPortfolioPage',
     isDefault: false

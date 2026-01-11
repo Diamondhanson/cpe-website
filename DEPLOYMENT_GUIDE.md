@@ -350,3 +350,4 @@ You still use your Namecheap domain, just point it to Vercel's hosting.
 
 
 
+

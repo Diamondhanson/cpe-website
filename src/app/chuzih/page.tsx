@@ -1,8 +1,7 @@
 import DirectorPortfolioPage from "../../pages/DirectorPortfolioPage";
 
-export default function Director() {
+export default function Chuzih() {
   return <DirectorPortfolioPage />;
 }
-
 
 

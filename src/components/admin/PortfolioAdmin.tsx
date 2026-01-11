@@ -313,7 +313,7 @@ export default function PortfolioAdmin() {
             type="button"
             onClick={save}
             disabled={!canSave || saving}
-            className="w-full bg-blue-social text-white py-3 px-4 font-semibold hover:bg-blue-social/90 disabled:opacity-60"
+            className="w-full bg-blue-600 text-white py-3 px-4 font-semibold hover:bg-blue-700 disabled:opacity-60"
           >
             {saving ? 'Saving…' : editingId ? 'Save changes' : 'Add portfolio item'}
           </button>

@@ -103,10 +103,10 @@ export default function HomePage() {
             <div className="col-span-full lg:col-span-8 lg:col-start-1 text-center lg:text-left">
               <h1 className="mb-6 leading-tight text-white font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans tracking-wide">
                 FANARTS<br />
-                <span className="text-orange-accent">STUDIO</span>
+                <span className="text-amber-300">STUDIO</span>
               </h1>
               <h2 className="luxury-heading mb-8 leading-tight text-white font-normal text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-                Crafting <span className="text-orange-accent italic">Visual Stories</span> That Transcend
+                Crafting <span className="text-amber-300 italic">Visual Stories</span> That Transcend
               </h2>
               <div className="mb-12">
                 <p className="text-base sm:text-lg text-gray-200 leading-relaxed font-serif max-w-md mx-auto lg:mx-0">
@@ -137,7 +137,7 @@ export default function HomePage() {
               </div>
               <h2 className="luxury-heading text-3xl sm:text-4xl md:text-5xl font-normal text-gray-900 mb-8 leading-tight">
                 Fanarts<br />
-                <span className="text-blue-title italic">Studio</span>
+                <span className="text-blue-800 italic">Studio</span>
               </h2>
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
@@ -179,7 +179,7 @@ export default function HomePage() {
             </div>
             <h2 className="luxury-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-gray-900 mb-6 leading-tight">
               Excellence in Every<br />
-              <span className="text-blue-title italic">Frame</span>
+              <span className="text-blue-800 italic">Frame</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-normal">
               From concept to completion, we offer comprehensive video production services 
@@ -254,7 +254,7 @@ export default function HomePage() {
               </div>
               <h2 className="luxury-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white leading-tight">
                 Featured<br />
-                <span className="text-orange-accent italic">Projects</span>
+                <span className="text-amber-300 italic">Projects</span>
               </h2>
             </div>
             <div className="lg:col-span-5 lg:col-start-8">
@@ -287,7 +287,7 @@ export default function HomePage() {
                       ></iframe>
                     </div>
                     <div>
-                      <p className="text-sm text-orange-accent font-medium tracking-wider uppercase mb-2">
+                      <p className="text-sm text-amber-300 font-medium tracking-wider uppercase mb-2">
                         {getCategoryDisplayName(work.category)}
                       </p>
                       <h3 className="text-xl font-normal text-white luxury-heading mb-2">
@@ -321,7 +321,7 @@ export default function HomePage() {
               </div>
               <h2 className="luxury-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-gray-900 leading-tight">
                 What Our<br />
-                <span className="text-blue-title italic">Clients Say</span>
+                <span className="text-blue-800 italic">Clients Say</span>
               </h2>
             </div>
           </div>
@@ -346,7 +346,7 @@ export default function HomePage() {
               }
             ].map((testimonial, index) => (
               <div key={index} className="testimonial-card">
-                <div className="mb-8 text-3xl text-blue-title opacity-60">❝</div>
+                <div className="mb-8 text-3xl text-blue-800 opacity-60">❝</div>
                 <p className="text-lg text-gray-700 leading-relaxed mb-8 font-normal italic">
                   {testimonial.quote}
                 </p>

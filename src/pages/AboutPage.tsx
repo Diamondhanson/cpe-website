@@ -76,7 +76,7 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-fade-in">
           <h1 className="luxury-heading mb-6 leading-none text-white font-normal text-6xl lg:text-7xl">
             About Our<br />
-            <span className="text-orange-accent italic">Creative Journey</span>
+            <span className="text-amber-300 italic">Creative Journey</span>
           </h1>
           <p className="text-xl text-gray-200 leading-relaxed font-normal max-w-2xl mx-auto">
             Discover the story behind Fanarts Studio and the passionate team 
@@ -95,7 +95,7 @@ export default function AboutPage() {
               </div>
               <h2 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
                 A Decade of<br />
-                <span className="text-blue-title italic">Visual Excellence</span>
+                <span className="text-blue-800 italic">Visual Excellence</span>
               </h2>
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed font-normal">
@@ -148,12 +148,12 @@ export default function AboutPage() {
                   height={700}
                   className="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-700 border-4 border-white/10"
                 />
-                <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-br from-blue-500 to-orange-400 opacity-30 rounded-2xl"></div>
-                <div className="absolute -top-8 -left-8 w-24 h-24 bg-gradient-to-br from-orange-500 to-blue-500 opacity-25 rounded-2xl"></div>
+                <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-br from-blue-500 to-amber-400 opacity-30 rounded-2xl"></div>
+                <div className="absolute -top-8 -left-8 w-24 h-24 bg-gradient-to-br from-amber-500 to-blue-500 opacity-25 rounded-2xl"></div>
               </div>
 
               <div className="mt-10 flex justify-center lg:justify-start">
-                <Link href="/director" className="btn-secondary px-12 py-4">
+                <Link href="/chuzih" className="btn-secondary px-12 py-4">
                   View portfolio
                 </Link>
               </div>
@@ -166,13 +166,13 @@ export default function AboutPage() {
               </div>
               <h2 className="luxury-heading text-5xl font-normal text-white mb-6 leading-tight">
                 Meet Our<br />
-                <span className="text-orange-accent italic">Visionary Leader</span>
+                <span className="text-amber-300 italic">Visionary Leader</span>
               </h2>
               
               <h3 className="text-2xl font-medium text-white mb-2 tracking-wide">
                 Chuzih Herbert
               </h3>
-              <p className="text-orange-accent text-sm font-medium tracking-wider uppercase mb-8">
+              <p className="text-amber-300 text-sm font-medium tracking-wider uppercase mb-8">
                 Chief Executive Officer & Founder
               </p>
               
@@ -209,7 +209,7 @@ export default function AboutPage() {
               </div>
 
               {/* Quote */}
-              <div className="mt-10 border-l-4 border-orange-accent pl-6 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-r-lg">
+              <div className="mt-10 border-l-4 border-amber-300 pl-6 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-r-lg">
                 <p className="text-lg text-gray-200 italic leading-relaxed font-normal">
                   &quot;Our mission is not just to create content, but to craft experiences that transcend 
                   cultural boundaries and connect people through the universal language of visual storytelling.&quot;
@@ -232,7 +232,7 @@ export default function AboutPage() {
             </div>
             <h2 className="luxury-heading text-6xl font-normal text-gray-900 leading-tight mb-8">
               Vision &<br />
-              <span className="text-blue-title italic">Mission</span>
+              <span className="text-blue-800 italic">Mission</span>
             </h2>
           </div>
 
@@ -240,11 +240,11 @@ export default function AboutPage() {
             {/* Vision */}
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-12 rounded-2xl transform hover:scale-105 transition-transform duration-500">
               <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-blue-title rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-blue-800 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-white text-2xl">👁️</span>
                 </div>
                 <h3 className="luxury-heading text-3xl font-normal text-gray-900 mb-4">
-                  Our <span className="text-blue-title italic">Vision</span>
+                  Our <span className="text-blue-800 italic">Vision</span>
                 </h3>
               </div>
               <p className="text-lg text-gray-700 leading-relaxed font-normal text-center">
@@ -285,7 +285,7 @@ export default function AboutPage() {
             </div>
             <h2 className="luxury-heading text-6xl font-normal text-white leading-tight mb-8">
               Creative<br />
-              <span className="text-orange-accent italic">Visionaries</span>
+              <span className="text-amber-300 italic">Visionaries</span>
             </h2>
             <p className="text-xl text-gray-300 font-normal leading-relaxed max-w-3xl mx-auto">
               Our diverse team of storytellers, technicians, and creative professionals 
@@ -317,16 +317,16 @@ export default function AboutPage() {
                         alt={member.name}
                         width={128}
                         height={128}
-                        className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white/20 group-hover:border-orange-accent/50 transition-all duration-500"
+                        className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white/20 group-hover:border-amber-300/50 transition-all duration-500"
                       />
                       <div className="absolute inset-0 rounded-full bg-gradient-to-t from-blue-900/20 to-transparent"></div>
                     </div>
 
-                    <h3 className="luxury-heading text-xl font-normal text-white mb-2 tracking-wide group-hover:text-orange-accent transition-colors duration-300">
+                    <h3 className="luxury-heading text-xl font-normal text-white mb-2 tracking-wide group-hover:text-amber-300 transition-colors duration-300">
                       {member.name}
                     </h3>
 
-                    <p className="text-orange-accent text-sm font-medium tracking-wider uppercase mb-4">
+                    <p className="text-amber-300 text-sm font-medium tracking-wider uppercase mb-4">
                       {member.role}
                     </p>
 

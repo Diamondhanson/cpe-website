@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 
 type ContactRow = {
@@ -19,7 +19,7 @@ export default function ContactsAdmin() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const load = useCallback(async () => {
+  async function load() {
     setLoading(true);
     setError(null);
 
@@ -37,21 +37,11 @@ export default function ContactsAdmin() {
 
     setItems((data ?? []) as ContactRow[]);
     setLoading(false);
-  }, []);
+  }
 
   useEffect(() => {
-    let mounted = true;
-    
-    async function initialLoad() {
-      await load();
-    }
-    
-    void initialLoad();
-    
-    return () => {
-      mounted = false;
-    };
-  }, [load]);
+    load();
+  }, []);
 
   async function remove(id: string) {
     if (!confirm('Delete this message?')) return;

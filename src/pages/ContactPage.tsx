@@ -8,8 +8,8 @@ import { supabase } from '../lib/supabaseClient';
 export default function ContactPage() {
   const instagramUrl = "https://www.instagram.com/chuzihofficial?igsh=bHkyY3hwN2d4ZHl2";
   const facebookUrl = "https://www.facebook.com/share/1bG6NRUfFW/?mibextid=wwXIfr";
+  const tiktokUrl = "https://www.tiktok.com/@chuzihdadido?_r=1&_t=ZT-92zBs7Qnc9v";
   // TODO: Provide these when ready
-  const vimeoUrl = "";
   const linkedinUrl = "";
 
   const email = "fanartscompanylimited@gmail.com";
@@ -43,35 +43,66 @@ export default function ContactPage() {
     setIsSubmitting(true);
     setSubmitError(null);
 
-    const { error } = await supabase.from('contact_messages').insert({
-      name: formData.name.trim(),
-      email: formData.email.trim(),
-      company: formData.company.trim() || null,
-      phone_number: formData.phoneNumber.trim() || null,
-      project_type: formData.projectType.trim() || null,
-      message: formData.message.trim(),
-    });
-
-    if (error) {
-      setSubmitError(error.message);
-      setIsSubmitting(false);
-      return;
-    }
-
-    setIsSubmitted(true);
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phoneNumber: '',
-        message: '',
-        projectType: ''
+    try {
+      // Save to Supabase database
+      const { error: dbError } = await supabase.from('contact_messages').insert({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        company: formData.company.trim() || null,
+        phone_number: formData.phoneNumber.trim() || null,
+        project_type: formData.projectType.trim() || null,
+        message: formData.message.trim(),
       });
-    }, 3000);
-    setIsSubmitting(false);
+
+      if (dbError) {
+        setSubmitError(`Database error: ${dbError.message}`);
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Send email notification
+      const emailResponse = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          company: formData.company.trim() || null,
+          phoneNumber: formData.phoneNumber.trim() || null,
+          projectType: formData.projectType.trim() || null,
+          message: formData.message.trim(),
+        }),
+      });
+
+      const emailData = await emailResponse.json();
+
+      if (!emailResponse.ok) {
+        console.error('Email sending failed:', emailData.error);
+        // Don't fail the form submission if email fails, just log it
+        // The message is already saved to the database
+      }
+
+      setIsSubmitted(true);
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phoneNumber: '',
+          message: '',
+          projectType: ''
+        });
+      }, 3000);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitError('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -98,7 +129,7 @@ export default function ContactPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-fade-in">
           <h1 className="luxury-heading mb-6 leading-none text-white font-normal text-6xl lg:text-7xl">
             Let&apos;s Create<br />
-            <span className="text-orange-accent italic">Something Amazing</span>
+            <span className="text-amber-300 italic">Something Amazing</span>
           </h1>
                       <p className="text-xl text-gray-200 leading-relaxed font-normal max-w-2xl mx-auto">
               Ready to bring your vision to life? Get in touch with our creative team 
@@ -118,7 +149,7 @@ export default function ContactPage() {
               </div>
               <h2 className="luxury-heading text-5xl font-normal text-gray-900 mb-8 leading-tight">
                 Start Your<br />
-                <span className="text-blue-title italic">Creative Journey</span>
+                <span className="text-blue-800 italic">Creative Journey</span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed font-normal mb-12">
                 Whether you&apos;re looking to create a commercial, documentary, or brand film, 
@@ -130,7 +161,7 @@ export default function ContactPage() {
               <div className="space-y-8">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-blue-social" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -146,7 +177,7 @@ export default function ContactPage() {
 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-blue-social" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
@@ -160,7 +191,7 @@ export default function ContactPage() {
 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-blue-social" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
@@ -181,7 +212,7 @@ export default function ContactPage() {
                     href={instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-blue-social rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
+                    className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
                   >
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -191,27 +222,21 @@ export default function ContactPage() {
                     href={facebookUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-blue-social rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
+                    className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
                   >
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                   </a>
                   <a
-                    href={vimeoUrl || "#"}
-                    target={vimeoUrl ? "_blank" : undefined}
-                    rel={vimeoUrl ? "noopener noreferrer" : undefined}
-                    aria-disabled={!vimeoUrl}
-                    onClick={(e) => {
-                      if (!vimeoUrl) e.preventDefault();
-                    }}
-                    className={`w-12 h-12 bg-blue-social rounded-sm flex items-center justify-center text-white transition-transform duration-300 ${
-                      vimeoUrl ? "hover:scale-110" : "opacity-50 cursor-not-allowed"
-                    }`}
-                    title={vimeoUrl ? "Vimeo" : "Vimeo (add your link)"}
+                    href={tiktokUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
+                    title="TikTok"
                   >
                     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M23.977 6.026c-.105 2.338-1.74 5.54-4.904 9.606-3.27 4.252-6.036 6.377-8.297 6.377-1.401 0-2.586-1.292-3.555-3.876L4.36 7.628c-.532-1.93-1.105-2.895-1.718-2.895-.132 0-.594.28-1.389.84L.01 3.962c.924-.812 1.83-1.623 2.716-2.435C3.934.481 4.84.029 5.444.01c1.427-.137 2.308.84 2.643 2.932.362 2.258.613 3.663.753 4.214.419 1.901.881 2.852 1.386 2.852.39 0 .977-.617 1.762-1.852.784-1.234 1.204-2.171 1.259-2.81.112-1.064-.309-1.596-1.263-1.596-.45 0-.913.104-1.388.309.924-3.025 2.692-4.493 5.304-4.404 1.935.056 2.842 1.31 2.719 3.761z" />
+                      <path d="M21.5 6.1a6.9 6.9 0 0 1-4-1.4 6.9 6.9 0 0 1-2.5-3.7H11.2v14.6a3.3 3.3 0 1 1-2.1-3.1V8.7a7.1 7.1 0 0 0-1.2-.1 7.2 7.2 0 1 0 7.2 7.2V8.4a10.6 10.6 0 0 0 6.4 2.1V6.1z" />
                     </svg>
                   </a>
                   <a
@@ -222,7 +247,7 @@ export default function ContactPage() {
                     onClick={(e) => {
                       if (!linkedinUrl) e.preventDefault();
                     }}
-                    className={`w-12 h-12 bg-blue-social rounded-sm flex items-center justify-center text-white transition-transform duration-300 ${
+                    className={`w-12 h-12 bg-blue-600 rounded-sm flex items-center justify-center text-white transition-transform duration-300 ${
                       linkedinUrl ? "hover:scale-110" : "opacity-50 cursor-not-allowed"
                     }`}
                     title={linkedinUrl ? "LinkedIn" : "LinkedIn (add your link)"}
@@ -359,7 +384,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-blue-social text-white py-4 px-6 rounded-sm font-semibold hover:bg-blue-social/90 transition-colors duration-300 focus:ring-2 focus:ring-blue-social focus:ring-offset-2"
+                      className="w-full bg-blue-600 text-white py-4 px-6 rounded-sm font-semibold hover:bg-blue-700 transition-colors duration-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     >
                       {isSubmitting ? 'Sending…' : 'Send Message'}
                     </button>
